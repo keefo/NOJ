@@ -12,7 +12,7 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 	~/.composer/vendor/bin/laravel new NOJ
 
 4. Fork this repository.
-5. Download the forked project into your local machine merge them into your NOJ folder which you've just created at step 3.
+5. Download the forked project into your local machine merge them into your NOJ folder which you've just created at step 4.
 6. Start coding add new features.
 
 ## Contributors
