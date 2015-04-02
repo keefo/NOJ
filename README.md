@@ -4,9 +4,7 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 
 ## Contributors
 
-**Xu Lian**
-
-I'm a Mac and iOS developer, the founder of  [Beyondcow](https://www.beyondcow.com), follow me on Twitter or Github.
+**Xu Lian** - a Mac and iOS developer, the founder of  [Beyondcow](https://www.beyondcow.com), follow me on Twitter or Github.
 
 - <https://twitter.com/lianxu>
 - <https://github.com/keefo>
