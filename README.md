@@ -2,6 +2,16 @@
 
 This is the 3rd version of NUC Online Judge system. The new system build on [Laravel 5](http://laravel.com/).
 
+## How to start?
+
+1. Make sure you have [Composer](https://getcomposer.org/doc/00-intro.md) installed on your machine.
+2. Make sure you have [Laravel 5](http://laravel.com/docs/master) installed on you machine.
+3. Use Laravel to create a new website.
+```~/.composer/vendor/bin/laravel new NOJ```
+4. Fork this repository.
+5. Download the forked project into your local machine merge them into your NOJ folder which you just created at step 3.
+6. Start coding add new features.
+
 ## Contributors
 
 **Xu Lian** - a Mac and iOS developer, the founder of  [Beyondcow](https://www.beyondcow.com), follow him on Twitter or Github.
