@@ -4,6 +4,7 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 
 ## How to start?
 
+0. Make sure you have PHP and http server installed on your machine.
 1. Make sure you have [Composer](https://getcomposer.org/doc/00-intro.md) installed on your machine.
 2. Make sure you have [Laravel 5](http://laravel.com/docs/master) installed on you machine.
 3. Use Laravel to create a new website.
