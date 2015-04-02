@@ -1,0 +1,160 @@
+@import "bootstrap/bootstrap";
+
+@link-color: #4183c4;
+@btn-font-weight: 300;
+@font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+@tune-color: #323a43;
+@navbar-height: 55px;
+@navbar-padding-v: (@navbar-height - 22)/2px;
+
+body, label, .checkbox label {
+	font-weight: 300;
+}
+
+.text-muted {
+  color: #999;
+  a{
+	  color: @link-color;  
+  }
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+  &:hover {
+  	color: @link-color;
+  	text-decoration: underline;
+  }
+}
+
+.navbar{
+	min-height:@navbar-height !important;
+	height: @navbar-height;
+	.navbar-header{
+		height: @navbar-height;
+	}
+	.navbar-right{
+		li{
+			padding-right: 0;
+			margin-left: 20px;
+			.btn-xs{
+				padding: 4px 11px !important;
+			}
+			a.btn-success {
+			  color: #fff !important;
+			}
+		}
+		li.btnli{
+			padding-top:@navbar-padding-v - 5 !important; 
+			padding-bottom:0 !important;
+			margin-left: 10px !important;
+		}
+	}
+	.navbar-brand{
+		padding: @navbar-padding-v 15px;
+		font-weight: bolder;
+		color: #111;
+			&:hover {
+		  		color: @link-color;
+		  	}
+	}
+	.navbar-logo{
+		width: 18px;
+		float: left;
+		margin-right: 5px;
+		.box-shadow(0 1px 1px rgba(0,0,0,.225));
+	}
+	.navbar-nav {
+	  	li {
+			padding-top:@navbar-padding-v+1 !important; 
+			padding-bottom:0 !important;
+		  	line-height: 20px;
+		  	a {
+			  padding-top: 0px !important;
+			  padding-bottom: 0px !important;
+			  padding: 0px 8px;
+			  font-size: 13px;
+			  font-weight: bold;
+			  line-height: 20px;
+			  color: #333;
+			  &:hover {
+			  	color: @link-color;
+			  }
+			}
+		}
+		
+	}
+	
+	.dropdown-menu li{
+		padding-top:0 !important; 
+		padding-bottom:0 !important;
+		margin-left: 0  !important;
+	}
+	
+	.navbar-toggle{
+		margin-top: 3px;
+		margin-bottom: 3px;
+	}
+	.navbar-form{
+		margin-top: (@navbar-height - 26px)/2px !important;
+		.input-sm, .form-group-sm .form-control{
+			height: 26px !important;
+		}
+		margin-right: 14px;
+	}
+}
+
+.footer {
+	margin-top: 40px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	color: #777;
+	font: 12px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  	line-height: 1.5;
+	border-top: 1px solid #eee;
+	.footer-logo{
+		width: 16px;
+	}
+}
+
+.attachtonavbar{
+	margin-top: -20px;
+}
+
+.signupbanner{
+	padding: 50px 0;
+	background: #202020 url(/img/signupbanner_bg.png) repeat;
+	h1{
+		font-size: 55px;
+		color: #fff;
+	}
+	h3{
+		font-size: 22px;
+		font-weight: normal;
+		color: #fff;
+		margin-bottom: 30px;
+	}
+}
+
+.signup-page{
+	.container{
+		max-width: 760px !important;
+	}
+	.setup-form{
+		.setup-form-title {
+		  margin-top: 0;
+		  font-size: 16px;
+		}
+		.setup-form-step1{
+			margin-top: 40px;
+		}
+	}	
+}
+
+.panel-heading{
+	background-color: lighten(@tune-color,20%) !important;
+	color: #fff !important;
+	a{
+		color: #fff !important;		
+	}
+}
