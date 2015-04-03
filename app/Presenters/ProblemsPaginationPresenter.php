@@ -17,24 +17,20 @@ class ProblemsPaginationPresenter extends BootstrapThreePresenter
             
         $currentpage =  $this->currentPage();
         $lastpage = $this->lastPage();
-		$mid = '';
-		
+        $mid = '<ul class="nav nav-tabs">';
 		for($i=1; $i <= $lastpage; $i++){
 			$url = $this->paginator->url($i);
+			$text = numberToRoman($i);
 			if($currentpage===$i){
-				$mid.='<li class="active"><span>'.numberToRoman($i).'</span></li>';
+				$mid.='<li class="active"><a href="#">'.$text.'</a></li>';
 			}
 			else{
-				$mid.='<li><a href="'.$url.'">'.numberToRoman($i).'</a></li>';
+				$mid.='<li><a href="'.$url.'">'.$text.'</a></li>';
 			}
 		}
+		$mid.='</ul>';
 		
-        return sprintf(
-            '<ul class="pagination" aria-label="Pagination">%s %s %s</ul></div>',
-            $this->getPreviousButton(),
-            $mid,
-            $this->getNextButton()
-        );
+        return $mid;
     }
 
     /**

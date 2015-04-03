@@ -7,13 +7,15 @@
 		<h1>Problem Set {{ numberToRoman($problems->currentPage()) }}</h1>
 	</div>
 	
+	<div class="pages">{!! $problems->render(new App\Presenters\ProblemsPaginationPresenter($problems)) !!}</div>
+	
 	<table class="table table-striped table-condensed">
-		<thead>
+		<thead class="">
 			<tr>
 			@if (!Auth::guest())
-				<th width="2%">Solved</th>
+				<th width="2%"><h5>Solved</h5></th>
 			@endif
-				<th class="text-center" width="8%">#</th><th>Title</th><th width="18%" class="text-center">Ratio ( AC / submit )</th><th width="5%" class="text-center">Difficulty</th></tr>
+				<th class="text-center" width="8%"><h5>#</h5></th><th><h5>Title</h5></th><th width="18%" class="text-center"><h5>Ratio ( AC / submit )</h5></th><th width="5%" class="text-center"><h5>Difficulty</h5></th></tr>
 		</thead>
 		<tbody>
 		@foreach ($problems as $problem)
@@ -40,19 +42,6 @@
 			</tr>
 		@endforeach
 		</tbody>
-		<tfoot>
-			<tr>
-			@if (Auth::guest())
-			<th colspan="5">
-			@else
-			<th colspan="4">
-			@endif
-			<div class="pagenation">{!! $problems->render(new App\Presenters\ProblemsPaginationPresenter($problems)) !!}</div>
-	
-			</th>
-			</tr>
-			
-		</tfoot>
 	</table>
 </div>
 
