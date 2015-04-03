@@ -27,6 +27,13 @@ a {
   }
 }
 
+.pagination{
+	.user-select(none);	
+	*{
+		.user-select(none);	
+	}
+}
+
 .navbar{
 	min-height:@navbar-height !important;
 	height: @navbar-height;
@@ -99,6 +106,7 @@ a {
 		margin-top: (@navbar-height - 26px)/2px !important;
 		.input-sm, .form-group-sm .form-control{
 			height: 26px !important;
+			width: 195px;
 		}
 		margin-right: 14px;
 	}

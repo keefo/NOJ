@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+	
+	<div class="pagehead">
+		<h1>Problem Set {{ numberToRoman($problems->currentPage()) }}</h1>
+	</div>
+	
 	<table class="table table-striped table-condensed">
 		<thead>
 			<tr>
@@ -15,7 +20,7 @@
 			<tr class="plist-item" id="p_{{ $problem->id }}">
 				@if (!Auth::guest())
 				<td class="text-center">
-					<span title="solved" class="text-muted glyphicon glyphicon-check"></span>
+					
 				</td>
 				@endif
 				<td class="text-center">{{ $problem->id+999 }}</td>
@@ -36,11 +41,17 @@
 		@endforeach
 		</tbody>
 		<tfoot>
+			<tr>
 			@if (Auth::guest())
-			<tr><th colspan="5"><div class="pagenation">{!! $problems->render() !!}</div></th></tr>
+			<th colspan="5">
 			@else
-			<tr><th colspan="4"><div class="pagenation">{!! $problems->render() !!}</div></th></tr>
+			<th colspan="4">
 			@endif
+			<div class="pagenation">{!! $problems->render(new App\Presenters\ProblemsPaginationPresenter($problems)) !!}</div>
+	
+			</th>
+			</tr>
+			
 		</tfoot>
 	</table>
 </div>

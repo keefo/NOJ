@@ -73,6 +73,5 @@ class ProblemController extends Controller {
 		return view('problems.show', compact('problem'));
 	}
 	
-	
-
 }
+
