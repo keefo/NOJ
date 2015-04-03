@@ -64,7 +64,6 @@
 			sidebar
 		</div>
 	</div>
-		
 
 </div>
 @endsection
