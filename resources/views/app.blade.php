@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>NUC Online Judge</title>
+	<title>NUC Online Judge v3</title>
 
 	<link id="page_favicon" href="{{ url('/favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
 	
@@ -42,7 +42,7 @@
 				</form>
 				
 				<ul class="nav navbar-nav">
-					<li><a href="#">Problems</a></li>
+					<li><a href="/problems/">Problems</a></li>
 					<li><a href="#">Judge</a></li>
 					<li><a href="#">Tutorial</a></li>
 					<li><a href="#">Blog</a></li>

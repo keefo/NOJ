@@ -14,8 +14,13 @@
 Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
+Route::get('problems', 'ProblemController@index');
+Route::get('problems/{slug}', array('as' => 'problems.show', 'uses' => 'ProblemController@show'));
+//Route::resource('problems', 'ProblemController');
+//Route::resource('problems/{id}', 'ProblemController@show');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+

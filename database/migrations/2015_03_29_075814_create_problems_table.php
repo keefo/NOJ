@@ -53,7 +53,8 @@ class CreateProblemsTable extends Migration {
 			$table->index('title');
 			$table->index('published');
 			$table->index('source');
-					
+			$table->index('slug');
+				
 		});
 	}
 
