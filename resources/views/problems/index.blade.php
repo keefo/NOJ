@@ -39,7 +39,7 @@
 				@else 
 					0%(0/0)
 				@endif</td>
-				<td class="text-center">{{ $problem->difficulty_level }}</td>
+				<td class="text-center difficulty">{!! numberToStar($problem->difficulty_level) !!}</td>
 			</tr>
 			@endif
 		@endforeach
