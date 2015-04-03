@@ -4,13 +4,13 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 
 ## How to start?
 
-0. Make sure you have PHP and http server installed on your machine.
-1. Make sure you have [Composer](https://getcomposer.org/doc/00-intro.md) installed on your machine.
-2. Fork this repository.
-3. Clone the forked project into your local machine.
-4. Under the folder, run ```composer install```
-5. Config .env.example file to .env file and edit it to map your local environment.
-6. Start coding add new features.
+1. Make sure you have PHP and http server installed on your machine.
+2. Make sure you have [Composer](https://getcomposer.org/doc/00-intro.md) installed on your machine.
+3. Fork this repository.
+4. Clone the forked project into your local machine.
+5. Under the folder, run ```composer install```
+6. Config .env.example file to .env file and edit it to map your local environment.
+7. Start coding add new features.
 
 ## Contributors
 
