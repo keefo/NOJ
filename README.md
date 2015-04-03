@@ -9,7 +9,7 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 2. Fork this repository.
 3. Clone the forked project into your local machine.
 4. Under the folder, run ```composer install```
-5. Config .env file to map your local environment.
+5. Config .env.example file to .env file and edit it to map your local environment.
 6. Start coding add new features.
 
 ## Contributors
