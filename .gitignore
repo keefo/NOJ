@@ -2,7 +2,6 @@
 .env.*.php
 .env.php
 .env
-.env.example
 node_modules
 vendor
 storage
