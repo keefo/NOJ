@@ -19,6 +19,7 @@
 		</thead>
 		<tbody>
 		@foreach ($problems as $problem)
+			@if ($problem->published)
 			<tr class="plist-item" id="p_{{ $problem->id }}">
 				@if (!Auth::guest())
 				<td class="text-center">
@@ -40,6 +41,7 @@
 				@endif</td>
 				<td class="text-center">{{ $problem->difficulty_level }}</td>
 			</tr>
+			@endif
 		@endforeach
 		</tbody>
 	</table>
