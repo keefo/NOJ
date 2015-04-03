@@ -11,6 +11,26 @@ var elixir = require('laravel-elixir');
  |
  */
 
+var paths = {
+    "assets": "resources/assets/",
+    "pubcss": "public/css/",
+    "pubfont": "public/fonts/",
+    "fontawesome": "./vendor/fortawesome/font-awesome/"
+}
+
 elixir(function(mix) {
-    mix.less('app.less');
+	mix.less('app.less')
+		.copy([
+			paths.fontawesome + 'css/font-awesome.min.css',
+			paths.fontawesome + 'css/font-awesome.css.map',
+		], paths.pubcss )
+		.copy([
+			paths.fontawesome + 'fonts/fontawesome-webfont.eot',
+			paths.fontawesome + 'fonts/fontawesome-webfont.svg',
+			paths.fontawesome + 'fonts/fontawesome-webfont.ttf',
+			paths.fontawesome + 'fonts/fontawesome-webfont.woff',
+			paths.fontawesome + 'fonts/fontawesome-webfont.woff2',
+			paths.fontawesome + 'fonts/FontAwesome.otf',
+		], paths.pubfont )
+		.version( paths.pubcss + 'app.css');
 });
