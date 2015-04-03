@@ -35,6 +35,14 @@ a {
 	}
 }
 
+.left-vertical-divider {
+	border-left: 1px solid #f2f2f2;
+}
+.right-vertical-divider {
+	border-right: 1px solid #f2f2f2;
+}
+
+
 .navbar{
 	min-height:@navbar-height !important;
 	height: @navbar-height;
@@ -192,35 +200,48 @@ a {
 	}
 }
 
-.login_google {
-	.user-select(none);	
-	.rounded(2px);
-	background-color: #d43a2b;
+.loginbtn{
+	color: #fff !important;
 	display: block;
-	color: #fff;
-	width: 190px;
 	height: 33px;
 	line-height: 33px;
 	text-shadow: none;
 	cursor: pointer;
+	max-width: 220px;
 	margin: 5px 0;
-	text-decoration: none;
+	text-decoration: none !important;
 	text-align: center;
 	font-size: 1.2em;
+	.user-select(none);	
+	.rounded(@border-radius-small);
+	&:hover{
+		color: #fff;
+		text-decoration: none !important;
+	}
+	&:active{
+		color: #fff;
+		text-decoration: none !important;
+	}
+	&:visited{
+		color: #fff;
+		text-decoration: none !important;
+	}
+}
+.login_google {
+	background-color: #d43a2b;
+	&:hover{
+	    background-color: darken(#d43a2b, 7%);
+	}
+	&:active{
+	    background-color: darken(#d43a2b, 15%);
+	}
 }
 .login_github {
-	.user-select(none);	
-	.rounded(2px);
 	background-color: #343434;
-	color: #fff;
-	display: block;
-	width: 190px;
-	height: 33px;
-	line-height: 33px;
-	text-shadow: none;
-	cursor: pointer;
-	margin: 5px 0;
-	text-decoration: none;
-	text-align: center;
-	font-size: 1.2em;
+	&:hover{
+	    background-color: darken(#343434, 7%);
+	}
+	&:active{
+	    background-color: darken(#343434, 15%);
+	}
 }

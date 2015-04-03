@@ -8,7 +8,7 @@
 
 	<link id="page_favicon" href="{{ url('/favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
 	<link rel="stylesheet" href="{{ elixir('css/app.css') }}">
-	<link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>

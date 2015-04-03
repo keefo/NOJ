@@ -15,6 +15,7 @@ var paths = {
     "assets": "resources/assets/",
     "pubcss": "public/css/",
     "pubfont": "public/fonts/",
+    "budfont": "public/build/fonts/",
     "fontawesome": "./vendor/fortawesome/font-awesome/"
 }
 
@@ -32,5 +33,10 @@ elixir(function(mix) {
 			paths.fontawesome + 'fonts/fontawesome-webfont.woff2',
 			paths.fontawesome + 'fonts/FontAwesome.otf',
 		], paths.pubfont )
-		.version( paths.pubcss + 'app.css');
+		.copy([
+		   paths.pubfont + '*',
+		], paths.budfont )
+		.version( paths.pubcss + 'app.css')
+		.phpUnit();
 });
+
