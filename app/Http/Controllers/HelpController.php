@@ -32,11 +32,8 @@ class HelpController extends Controller {
 	 */
 	public function index()
 	{
-		$article = Article::whereSlug('faq')->firstOrFail();
-		if(!$article->published){
-			return view('help.notpublished');
-		}
-		return view('help.index', ['article' => $article]);
+		$articles = Article::whereCategory(1)->get();
+		return view('help.index', ['articles' => $articles]);
 	}
 
 }
