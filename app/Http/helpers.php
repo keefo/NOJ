@@ -1,5 +1,8 @@
 <?php
 
+use Str;
+use HTML;
+
 function numberToRoman($N) 
 {
 	$c='IVXLCDM'; 
@@ -21,6 +24,10 @@ function numberToStar($N)
 	return $s; 
 }
 
+function truncateTitle($str, $words=50)
+{
+	return HTML::entities(Str::words(trim(strip_tags($str)), $words));	
+}
 
 function countriesCode(){
 	$code['RD']=0;//Reserved 

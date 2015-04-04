@@ -23,12 +23,12 @@
 			<tr class="plist-item" id="p_{{ $problem->id }}">
 				@if (!Auth::guest())
 				<td class="text-center">
-					
+					<!-- show user solved the problem or not -->
 				</td>
 				@endif
 				<td class="text-center">{{ $problem->id+999 }}</td>
 				<td>
-					<a href="{{ url('/problems', $problem->slug) }}">{{ $problem->title }}</a>
+					<a href="{{ url('/problems', $problem->slug) }}" title="{{ truncateTitle($problem->description) }}">{{ $problem->title }}</a>
 					@if($problem->analysis)
 						<span title="has Analysis" class="analysis_sign glyphicon glyphicon-info-sign"></span>
 					@endif
@@ -45,6 +45,10 @@
 		@endforeach
 		</tbody>
 	</table>
+	
+	<!-- Usage as a class -->
+	<div class="clearfix"></div>
+
 </div>
 
 
