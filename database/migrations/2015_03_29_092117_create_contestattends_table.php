@@ -14,12 +14,14 @@ class CreateContestattendsTable extends Migration {
 	{
 		Schema::create('contestattends', function(Blueprint $table)
 		{
+			$table->timestamps();
 			$table->bigInteger('user_id')->unsigned();
 			$table->bigInteger('contest_id')->unsigned();
 			
 			$table->string('username', 45);
 			$table->string('screen_name', 45);
 			$table->string('nick', 64);
+			$table->string('ip', 20);
 			
 			$table->integer('accepts')->unsigned();
 			$table->integer('penalty')->unsigned();

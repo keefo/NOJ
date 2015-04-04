@@ -146,7 +146,6 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		
-
 	],
 
 	/*
@@ -197,7 +196,7 @@ return [
 		'Form'		=> 'Illuminate\Html\FormFacade',
 		'HTML'		=> 'Illuminate\Html\HtmlFacade',
 		'Paginator' => 'Illuminate\Pagination\Paginator',
-		
+
 	],
 
 ];

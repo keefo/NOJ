@@ -24,7 +24,6 @@ class CreateSubmitsTable extends Migration {
 			
 			$table->integer('time');
 			$table->integer('memory');
-			$table->string('class_name', 16);
 			$table->tinyInteger('result');
 			$table->tinyInteger('language');
 			$table->string('ip', 20);
@@ -35,9 +34,7 @@ class CreateSubmitsTable extends Migration {
 			
 			$table->bigInteger('contest_id')->unsigned();
 			$table->foreign('contest_id')->references('id')->on('contests');
-			
-			$table->tinyInteger('contest_problem_number');
-			
+	
 			$table->index('user_id');
 			$table->index('problem_id');
 			$table->index('is_valid_solution');

@@ -25,6 +25,11 @@
 				<span class="text-muted">Accepted:</span> {{ $problem->accept_count }}
 				</h5>
 			</p>
+			@if($problem->is_special_judge)
+			<p>
+				<h5 class="text-danger"><abbr title="This problem has multiple possible answers.">Special Judge</abbr></h5>
+			</p>
+			@endif
 		</div>
 	</div>
 	

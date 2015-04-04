@@ -16,7 +16,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var string
 	 */
 	protected $table = 'users';
-
+	
+/*
+	protected $guarded = [
+						'id', 
+						'created_at', 
+						'updated_at', 
+						'verified', 
+						'login_ip', 
+						'login_count',
+						'login_at',
+						'recoveryhash',
+						'register_at', 
+						'register_ip', 
+						'github_avatar_url', 
+						'github_access_token', 
+						'google_avatar_url', 
+						'google_access_token',
+						];
+*/
+						 
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -74,7 +93,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 							'github_avatar_url', 
 							'github_access_token', 
 							'google_avatar_url', 
-							'google_access_token'
+							'google_access_token',
 							];
 
 	/**

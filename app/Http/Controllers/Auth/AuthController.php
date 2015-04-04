@@ -29,13 +29,9 @@ class AuthController extends Controller {
 	 */
 	public function __construct(Guard $auth, Registrar $registrar)
 	{
-		echo '111';
-		
 		$this->auth = $auth;
 		$this->registrar = $registrar;
-		//'key' => env('APP_KEY', 'SomeRandomString'),
-		$this->github_login_url = $registrar;
-	
+		
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 

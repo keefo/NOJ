@@ -21,50 +21,55 @@
 	<![endif]-->
 </head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/"><img class="navbar-logo" src="{{ url('/img/logo.png') }}" /> NOJ</a>
-			</div>
-
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			
-				<form class="navbar-form form-horizontal navbar-left" role="search">
-				  <div class="form-group form-group-sm">
-				    <input type="text" class="form-control" placeholder="Search">
-				  </div>
-				</form>
-				
-				<ul class="nav navbar-nav">
-					<li><a href="/problems/">Problems</a></li>
-					<li><a href="#">Judge</a></li>
-					<li><a href="#">Tutorial</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Help</a></li>
-        		</ul>
-				
-				<ul class="nav navbar-nav navbar-right">
-					@if (Auth::guest())
-						<li class="btnli"><a class="btn btn-xs btn-success" href="{{ url('/auth/register') }}">Sign up</a></li>
-						<li class="btnli"><a class="btn btn-xs btn-default" href="{{ url('/auth/login') }}">Sign in</a></li>
-					@else
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}">Sign out</a></li>
-							</ul>
-						</li>
-					@endif
-				</ul>
-			</div>
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle Navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/"><img class="navbar-logo" src="{{ url('/img/logo.png') }}" /> NOJ</a>
 		</div>
-	</nav>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		
+			<form class="navbar-form form-horizontal navbar-left" role="search">
+			  <div class="form-group form-group-sm">
+			    <input type="text" class="form-control" placeholder="Search">
+			  </div>
+			</form>
+			
+			<ul class="nav navbar-nav">
+				<li><a href="/problems/">Problems</a></li>
+				<li><a href="#">Judge</a></li>
+				<li><a href="#">Tutorial</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Help</a></li>
+    		</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+				@if (Auth::guest())
+					<li><p class="navbar-btn">
+	                    <a href="{{ url('/auth/register') }}" class="btn btn-success">Sign up</a>
+	                </p></li>
+	                <li><p class="navbar-btn">
+	                    <a href="{{ url('/auth/login') }}" class="btn btn-default">Sign in</a>
+	                </p></li>
+				@else
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ url('/auth/logout') }}">Sign out</a></li>
+						</ul>
+					</li>
+				@endif
+			</ul>
+		</div>
+	</div>
+</nav>
+	
 
 	@yield('content')
 

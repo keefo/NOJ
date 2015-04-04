@@ -2,10 +2,12 @@
 
 use App\Models\User;
 use App\Models\Problem;
+use App\Models\Code;
 use Illuminate\Database\Eloquent\Model;
 use Paginator;
 use Session;
 use Input;
+use DB;
 
 class ProblemController extends Controller {
 
@@ -37,6 +39,9 @@ class ProblemController extends Controller {
 	 */
 	public function index()
 	{
+		//$results = Code::firstOrFail();
+		//dd($results->code());
+		
 		$problemsPage = Input::get("page", Session::get('problemsPage', '1'));
 		Paginator::currentPageResolver(function() use ($problemsPage) {
 		    return $problemsPage;

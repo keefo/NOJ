@@ -1,11 +1,12 @@
 @import "bootstrap/bootstrap";
 
+
 @link-color: #4183c4;
 @btn-font-weight: 300;
 @font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
 @tune-color: #323a43;
-@navbar-height: 55px;
-@navbar-padding-v: (@navbar-height - 22)/2px;
+//@navbar-height: 55px;
+//@navbar-padding-v: (@navbar-height - 22)/2px;
 @light-gray-color: #ccc;
 
 body, label, .checkbox label {
@@ -47,7 +48,46 @@ a {
 	border-right: 1px solid #f2f2f2;
 }
 
+.navbar{
+	.navbar-brand{
+		font-weight: bolder;
+		color: #111;
+			&:hover {
+		  		color: @link-color;
+		  	}
+		.navbar-logo{
+			width: 18px;
+			float: left;
+			margin-right: 5px;
+			.box-shadow(0 1px 1px rgba(0,0,0,.225));
+		}
+	}
+	.navbar-nav {
+	  	li {
+			a {
+			  font-size: 13px;
+			  font-weight: bold;
+			  padding-left:8px;
+			  padding-right:8px;
+			  color: #333;
+			  &:hover {
+			  	color: @link-color;
+			  }
+			}
+		}
+	}
+	.navbar-btn{
+		a.btn-success{
+			color: #fff !important;
+		}
+		a.btn-default:hover{
+			color: #000 !important;
+		}
+		margin-left: 8px;
+	}
+}
 
+/*
 .navbar{
 	min-height:@navbar-height !important;
 	height: @navbar-height;
@@ -125,6 +165,7 @@ a {
 		margin-right: 14px;
 	}
 }
+*/
 
 .footer {
 	/*margin-top: 40px;*/
