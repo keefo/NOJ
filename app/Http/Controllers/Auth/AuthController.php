@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 
 use Auth;
+use Input;
 
 class AuthController extends Controller {
 
@@ -34,16 +35,13 @@ class AuthController extends Controller {
 	public function postLogin(Request $request)
 	{
 	    $this->validate($request, [
-	        'name' => 'required',
+	        'inputid' => 'required',
 	        'password' => 'required',
 	    ]);
 		
-		$field = filter_var($request->input('name'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-		$request->merge([$field => $request->input('name')]);
-    
-	    //$credentials = $request->only('name', 'password');
-		//$name = $request->input('name');
-		//$password = $request->input('password');
+		$field = filter_var($request->input('inputid'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+		$request->merge([$field => $request->input('inputid')]);
+		//dd(Input::all());
 		
 	    if ($this->auth->attempt($request->only($field, 'password'), $request->has('remember')))
 	    {

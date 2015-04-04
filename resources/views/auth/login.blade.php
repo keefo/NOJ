@@ -27,7 +27,7 @@
 								<div class="form-group">
 									<label class="control-label"><strong>Username or Email</strong></label>
 									<div class="">
-										<input type="text" class="form-control" name="name" tabindex="1" value="{{ old('name') }}">
+										<input type="text" class="form-control" name="inputid" tabindex="1" value="{{ old('inputid') }}">
 									</div>
 								</div>
 		
