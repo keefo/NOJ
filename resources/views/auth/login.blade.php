@@ -20,8 +20,6 @@
 								</div>
 							@endif
 							
-							{{ $github_login_url }}
-							
 							<div class="col-md-10 col-md-offset-1">
 							<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
