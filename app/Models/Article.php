@@ -16,6 +16,7 @@ class Article extends Model {
 						'created_by',
 						'updated_at',
 						'updated_by',
+						'category',
 						'published',
 						'title',
 						'slug',

@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration {
 			$table->timestamps();
 			$table->bigInteger('updated_by')->unsigned();
 			$table->bigInteger('create_by')->unsigned();
+			$table->integer('category');
 			
 			$table->boolean('published');
 			$table->string('title', 128);
@@ -29,6 +30,7 @@ class CreateArticlesTable extends Migration {
 			
 			$table->index('title');
 			$table->index('slug');
+			$table->index('category');
 			
 		});
 	}

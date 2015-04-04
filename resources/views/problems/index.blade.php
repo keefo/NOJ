@@ -3,10 +3,10 @@
 @section('content')
 <div class="container problems">
 	
-	<div class="pagehead">
-		<h1>Problem Set {{ numberToRoman($problems->currentPage()) }}</h1>
+	<div class="page-header">
+	  <h1>Problem Set {{ numberToRoman($problems->currentPage()) }}</h1>
 	</div>
-	
+
 	<div class="pages">{!! $problems->render(new App\Presenters\ProblemsPaginationPresenter($problems)) !!}</div>
 	
 	<table class="table table-striped table-condensed">

@@ -1,39 +1,39 @@
 @extends('app')
 	
 @section('content')
+
+<div class="container">
+	<ol class="breadcrumb">
+	  <li><a href="/">Home</a></li>
+	  <li><a href="{{ url('/problems?page='.ceil($problem->id/100)) }}">Problems</a></li>
+	  <li class="active">{{ $problem->title }}</li>
+	</ol>
+</div>
+
 <div class="container problem">
 
-	<div class="row">
-		<div class="col-xs-12 text-center">
-			<h1 class="text-center">{{ $problem->title }}</h1>
+	<div class="page-header text-center">
+		<h1>{{ $problem->title }}</h1>
+		<div>
+			<h5>
+			<span class="text-muted">Time Limit:</span> {{ $problem->time_limit }}ms 
+			&nbsp;&nbsp;&nbsp; 
+			<span class="text-muted">Memory Limit:</span> {{ $problem->memory_limit }}K
+			</h5>
 		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-xs-12 text-center">
-			<p>
-				<h5>
-				<span class="text-muted">Time Limit:</span> {{ $problem->time_limit }}ms 
-				&nbsp;&nbsp;&nbsp; 
-				<span class="text-muted">Memory Limit:</span> {{ $problem->memory_limit }}K
-				</h5>
-			</p>
-			<p>
-				<h5>
-				<span class="text-muted">Total Submissions:</span> {{ $problem->submit_count }} 
-				&nbsp;&nbsp;&nbsp; 
-				<span class="text-muted">Accepted:</span> {{ $problem->accept_count }}
-				</h5>
-			</p>
-			@if($problem->is_special_judge)
-			<p>
-				<h5 class="text-danger"><abbr title="This problem has multiple possible answers.">Special Judge</abbr></h5>
-			</p>
-			@endif
+		<div>
+			<h5>
+			<span class="text-muted">Total Submissions:</span> {{ $problem->submit_count }} 
+			&nbsp;&nbsp;&nbsp; 
+			<span class="text-muted">Accepted:</span> {{ $problem->accept_count }}
+			</h5>
 		</div>
+		@if($problem->is_special_judge)
+		<div>
+			<h5 class="text-danger"><abbr title="This problem has multiple possible answers.">Special Judge</abbr></h5>
+		</div>
+		@endif
 	</div>
-	
-	<hr/>
 	
 	<h2>Description</h2>
 	<div class="row description">
