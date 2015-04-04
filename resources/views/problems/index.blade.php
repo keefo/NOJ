@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<div class="container">
+<div class="container problems">
 	
 	<div class="pagehead">
 		<h1>Problem Set {{ numberToRoman($problems->currentPage()) }}</h1>
@@ -30,7 +30,7 @@
 				<td>
 					<a href="{{ url('/problems', $problem->slug) }}">{{ $problem->title }}</a>
 					@if($problem->analysis)
-						<span title="has Analysis" class="text-muted glyphicon glyphicon-info-sign"></span>
+						<span title="has Analysis" class="analysis_sign glyphicon glyphicon-info-sign"></span>
 					@endif
 				</td>
 				<td class="text-center">

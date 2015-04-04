@@ -3,6 +3,9 @@
 use App\Models\User;
 use App\Models\Problem;
 use Illuminate\Database\Eloquent\Model;
+use Paginator;
+use Session;
+use Input;
 
 class ProblemController extends Controller {
 
@@ -34,8 +37,12 @@ class ProblemController extends Controller {
 	 */
 	public function index()
 	{
+		$problemsPage = Input::get("page", Session::get('problemsPage', '1'));
+		Paginator::currentPageResolver(function() use ($problemsPage) {
+		    return $problemsPage;
+		});
 		$problems = Problem::paginate(100);
-		//dd($problems);
+		Session::put('problemsPage', $problems->currentPage());
 		return view('problems.index', compact('problems'));
 	}
 	
