@@ -49,9 +49,9 @@ class AuthController extends Controller {
 	    }
 	
 	    return redirect($this->loginPath())
-	                ->withInput($request->only('name', 'remember'))
+	                ->withInput($request->only('inputid', 'remember'))
 	                ->withErrors([
-	                    'name' => 'These credentials do not match our records.',
+	                    'inputid' => 'This credential do not match our records.',
 	                ]);
 	}
 

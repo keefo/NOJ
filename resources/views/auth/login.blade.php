@@ -27,19 +27,21 @@
 								<div class="form-group">
 									<label class="control-label"><strong>Username or Email</strong></label>
 									<div class="">
-										<input type="text" class="form-control" name="inputid" tabindex="1" value="{{ old('inputid') }}">
+										{!! Form::text('inputid', Input::old('inputid'), array('tabindex' => '1', 'class' => 'form-control')) !!}
 									</div>
 								</div>
 		
 								<div class="form-group">
 									<label class="control-label"><strong>Password</strong> (<a href="{{ url('/password/email') }}" tabindex="5">Forgot password</a>)</label>
-									<input type="password" class="form-control" name="password" tabindex="2">
+									{!! Form::password('password', array('tabindex' => '2', 'class' => 'form-control')) !!}
 								</div>
 		
 								<div class="form-group">
 									<div class="checkbox">
+										
 										<label>
-											<input type="checkbox" name="remember" tabindex="3"> Remember Me
+											{!! Form::checkbox('remember', Input::old('remember'), 'on', array('tabindex' => '3')) !!}
+											Remember Me
 										</label>
 									</div>
 								</div>
