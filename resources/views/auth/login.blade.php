@@ -25,27 +25,27 @@
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		
 								<div class="form-group">
-									<label class="control-label"><strong>Email</strong></label>
+									<label class="control-label"><strong>Username or Email</strong></label>
 									<div class="">
-										<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+										<input type="text" class="form-control" name="name" tabindex="1" value="{{ old('name') }}">
 									</div>
 								</div>
 		
 								<div class="form-group">
-									<label class="control-label"><strong>Password</strong> (<a href="{{ url('/password/email') }}">Forgot password</a>)</label>
-									<input type="password" class="form-control" name="password">
+									<label class="control-label"><strong>Password</strong> (<a href="{{ url('/password/email') }}" tabindex="5">Forgot password</a>)</label>
+									<input type="password" class="form-control" name="password" tabindex="2">
 								</div>
 		
 								<div class="form-group">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" name="remember"> Remember Me
+											<input type="checkbox" name="remember" tabindex="3"> Remember Me
 										</label>
 									</div>
 								</div>
 		
 								<div class="form-group">
-										<button type="submit" class="btn btn-default">Sign in</button>
+										<button type="submit" class="btn btn-default" tabindex="4">Sign in</button>
 								</div>
 							</form>
 							</div>

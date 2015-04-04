@@ -4,6 +4,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+
+use Auth;
 
 class AuthController extends Controller {
 
@@ -19,6 +22,41 @@ class AuthController extends Controller {
 	*/
 
 	use AuthenticatesAndRegistersUsers;
+	
+
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array  $data
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */
+
+	public function postLogin(Request $request)
+	{
+	    $this->validate($request, [
+	        'name' => 'required',
+	        'password' => 'required',
+	    ]);
+		
+		$field = filter_var($request->input('name'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+		$request->merge([$field => $request->input('name')]);
+    
+	    //$credentials = $request->only('name', 'password');
+		//$name = $request->input('name');
+		//$password = $request->input('password');
+		
+	    if ($this->auth->attempt($request->only($field, 'password'), $request->has('remember')))
+	    {
+	        return redirect()->intended($this->redirectPath());
+	    }
+	
+	    return redirect($this->loginPath())
+	                ->withInput($request->only('name', 'remember'))
+	                ->withErrors([
+	                    'name' => 'These credentials do not match our records.',
+	                ]);
+	}
+
 
 	/**
 	 * Create a new authentication controller instance.
@@ -31,9 +69,7 @@ class AuthController extends Controller {
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
-
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
-
 
 }
