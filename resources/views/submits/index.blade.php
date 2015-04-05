@@ -10,34 +10,36 @@
 	<table class="table table-striped table-condensed">
 		<thead class="">
 			<tr>
-				<th class="text-center" width="8%"><h5>#</h5></th>
+				<th width="140px"><h5>Date</h5></th>
 				<th><h5>User</h5></th>
 				<th><h5>Problem</h5></th>
 				<th class="text-center"><h5>Result</h5></th>
 				<th class="text-center"><h5>Time</h5></th>
 				<th class="text-center"><h5>Memory</h5></th>
-				<th class="text-right"><h5>Date</h5></th>
+				<th class="text-center"><h5>Language</h5></th>
 			</tr>
 		</thead>
 		<tbody>
 		@foreach ($submits as $submit)
 			<tr class="plist-item" id="p_{{ $submit->id }}">
-				<td class="text-center">{{ $submit->id }}</td>
+				<td title="{{ $submit->created_at }}">
+					{{ $submit->relativeCreatedDate() }}
+				</td>
 				<td>
 					<a href="#">{{ $submit->username }}</a>
 				</td>
 				<td>
 					<a href="{{ url('/problems', $submit->problemslug) }}">{{ $submit->problemtitle }}</a>
 				</td>
-				<td class="text-center">{!! submitResultStatus($submit->result,$submit->id) !!}</td>
+				<td class="text-center">{!! $submit->resultStatus() !!}</td>
 				<td class="text-center">
-					{{ $submit->time }}ms
+					{!! $submit->time() !!}
 				</td>
 				<td class="text-center">
-					{{ $submit->memory }}K
+					{!! $submit->memory() !!}
 				</td>
-				<td class="text-right">
-					{{ $submit->created_at }}
+				<td class="text-center">
+					{!! $submit->language() !!}
 				</td>
 			</tr>
 		@endforeach

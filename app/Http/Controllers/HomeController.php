@@ -46,7 +46,7 @@ class HomeController extends Controller {
 		leftJoin('users','users.id','=','submits.user_id')->
 		leftJoin('problems','problems.id','=','submits.problem_id')->
 		select(array('submits.*','users.name as username','problems.title as problemtitle'))->
-		paginate(25);
+		paginate(30);
 		return view('home', compact('submits'));
 	}
 
