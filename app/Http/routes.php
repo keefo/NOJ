@@ -17,6 +17,9 @@ Route::get('home', 'HomeController@index');
 Route::get('problems', 'ProblemController@index');
 Route::get('help', 'HelpController@index');
 Route::get('problems/{slug}', array('as' => 'problems.show', 'uses' => 'ProblemController@show'));
+Route::get('submit', 'SubmitController@index');
+Route::post('submit', 'SubmitController@post');
+
 //Route::resource('problems', 'ProblemController');
 //Route::resource('problems/{id}', 'ProblemController@show');
 

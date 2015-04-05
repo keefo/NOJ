@@ -87,85 +87,9 @@ a {
 	}
 }
 
-/*
-.navbar{
-	min-height:@navbar-height !important;
-	height: @navbar-height;
-	.navbar-header{
-		height: @navbar-height;
-	}
-	.navbar-right{
-		li{
-			padding-right: 0;
-			margin-left: 20px;
-			.btn-xs{
-				padding: 4px 11px !important;
-			}
-			a.btn-success {
-			  color: #fff !important;
-			}
-		}
-		li.btnli{
-			padding-top:@navbar-padding-v - 5 !important; 
-			padding-bottom:0 !important;
-			margin-left: 10px !important;
-		}
-	}
-	.navbar-brand{
-		padding: @navbar-padding-v 15px;
-		font-weight: bolder;
-		color: #111;
-			&:hover {
-		  		color: @link-color;
-		  	}
-	}
-	.navbar-logo{
-		width: 18px;
-		float: left;
-		margin-right: 5px;
-		.box-shadow(0 1px 1px rgba(0,0,0,.225));
-	}
-	.navbar-nav {
-	  	li {
-			padding-top:@navbar-padding-v+1 !important; 
-			padding-bottom:0 !important;
-		  	line-height: 20px;
-		  	a {
-			  padding-top: 0px !important;
-			  padding-bottom: 0px !important;
-			  padding: 0px 8px;
-			  font-size: 13px;
-			  font-weight: bold;
-			  line-height: 20px;
-			  color: #333;
-			  &:hover {
-			  	color: @link-color;
-			  }
-			}
-		}
-		
-	}
-	
-	.dropdown-menu li{
-		padding-top:0 !important; 
-		padding-bottom:0 !important;
-		margin-left: 0  !important;
-	}
-	
-	.navbar-toggle{
-		margin-top: 3px;
-		margin-bottom: 3px;
-	}
-	.navbar-form{
-		margin-top: (@navbar-height - 26px)/2px !important;
-		.input-sm, .form-group-sm .form-control{
-			height: 26px !important;
-			width: 195px;
-		}
-		margin-right: 14px;
-	}
+.page-header{
+	margin: 26px 0 20px;
 }
-*/
 
 .footer {
 	/*margin-top: 40px;*/
@@ -299,3 +223,47 @@ a {
 	    background-color: darken(#343434, 15%);
 	}
 }
+
+.feed-item{
+	font-size: 13px;
+	font-weight: normal;
+	height: 46px;
+	line-height: 46px;
+	border-bottom: 1px solid #f3f3f3;
+	color: #666;
+	
+	.glyphicon{
+		color: @light-gray-color;
+	}
+	.date{
+		color: @light-gray-color;
+		font-size: 12px;
+	}
+	.S_AC{color:#090}
+	.S_TL{}
+	.S_ML{}
+	.S_WA{}
+	.S_PE{}
+	.S_RE{}
+	.S_OL{}
+	.S_FL{}
+}
+.solved{
+}
+.unsolved{
+	
+}
+.submits{
+	.S_AC{color:#090;font-weight:bolder;}
+	.S_TL{color:#900}
+	.S_ML{color:#900}
+	.S_WA{color:#900}
+	.S_PE{color:#900}
+	.S_RE{color:#900}
+	.S_OL{color:#900}
+	.S_FL{color:#900}
+}
+
+
+	
+	

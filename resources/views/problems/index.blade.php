@@ -30,7 +30,7 @@
 				<td>
 					<a href="{{ url('/problems', $problem->slug) }}" title="{{ truncateTitle($problem->description) }}">{{ $problem->title }}</a>
 					@if($problem->analysis)
-						<span title="has Analysis" class="analysis_sign glyphicon glyphicon-info-sign"></span>
+					<span title="has Analysis" class="analysis_sign glyphicon glyphicon-info-sign"></span>
 					@endif
 				</td>
 				<td class="text-center">

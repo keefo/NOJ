@@ -1,7 +1,22 @@
 <?php
 
-use Str;
-use HTML;
+define('RS_AC', 0);//accepted
+define('RS_PE', 1);//presentation error
+define('RS_TL', 2);//time limit exceed
+define('RS_ML', 3);//memory limit exceed
+define('RS_WA', 4);//wrong answer
+define('RS_RE', 5);//runtime error
+define('RS_OL', 6);//output limit exceed
+define('RS_CE', 7);//compile error
+define('RS_SE', 8);//system error
+define('RS_VE', 9);//Validate Error
+define('RS_WT', 10);//waiting
+define('RS_RJ', 11);//re-judging
+define('RS_JG', 12);//judging
+define('RS_CP', 13);//compiling
+define('RS_RF', 14);//restrict function call
+define('RS_AT', 15);//abnormal termination
+
 
 function numberToRoman($N) 
 {
@@ -24,9 +39,107 @@ function numberToStar($N)
 	return $s; 
 }
 
+function submitResultIcon($result) 
+{
+	static $ra = [
+    	0 => '<span class="S_AC">solve</span>',
+		1 => '<span class="S_PE">Presentation Error</span>',
+		2 => '<span class="S_TL">Time Limit Exceed</span>',
+		3 => '<span class="S_ML">Memory Limit Exceed</span>',
+		4 => '<span class="S_WA">Wrong Answer</span>',
+		5 => '<span class="S_RE">Runtime Error</span>',
+		6 => '<span class="S_OL">Output Limit Exceed</span>',
+		7 => '<span class="S_CE">Compile Error</span>',
+		8 => '<span class="S_SE">System Error</span>',
+		9 => '<span class="S_VE">Validate Error</span>',
+		10 => '<span class="S_WT">Waiting</span>',
+		11 => '<span class="S_WT">Rejudging</span>',
+		12 => '<span class="S_WT">Judging</span>',
+		13 => '<span class="S_WT">Compiling</span>',
+		14 => '<span class="S_RF">Restricted Function</span>',
+		15 => '<span class="S_AT">Runtime Error</span>',
+	];
+	
+	$result=$result*1;
+	
+	if($result==0) return '<span class="glyphicon glyphicon-ok"></span>';
+	//if($result==2) return '<span class="glyphicon glyphicon-hourglass"></span>';
+	if($result==10) return '<span class="glyphicon glyphicon-hourglass"></span>';
+/*
+	if($result==2) return "cpulimit";
+	if($result==3) return "memlimit";
+	if($result==4) return "wronganswer";
+	if($result==5) return "runtimeerror";
+	if($result==5) return "runtimeerror";
+*/
+
+	return '<span class="glyphicon glyphicon-remove"></span>';
+}
+
+function submitResultStatus($result, $submit_id) 
+{
+	static $ra = [
+    	0 => '<span class="S_AC" title="Accepted">Accepted</span>',
+		1 => '<span class="S_PE" title="Presentation Error">Presentation Error</span>',
+		2 => '<span class="S_TL" title="Time Limit Exceed">Time Limit Exceed</span>',
+		3 => '<span class="S_ML" title="Memory Limit Exceed">Memory Limit Exceed</span>',
+		4 => '<span class="S_WA" title="Wrong Answer">Wrong Answer</span>',
+		5 => '<span class="S_RE" title="Runtime Error">Runtime Error</span>',
+		6 => '<span class="S_OL" title="Output Limit Exceed">tried</span>',
+		7 => '<span class="S_CE" title="Compile Error">Compile Error</span>',
+		8 => '<span class="S_SE" title="System Error">System Error</span>',
+		9 => '<span class="S_VE" title="Validate Error">Validate Error</span>',
+		10 => '<span class="S_WT" title="Waiting">Waiting</span>',
+		11 => '<span class="S_WT" title="Rejudging">Rejudging</span>',
+		12 => '<span class="S_WT" title="Judging">Judging</span>',
+		13 => '<span class="S_WT" title="Compiling">Compiling</span>',
+		14 => '<span class="S_RF" title="Restricted Function">Restricted Function</span>',
+		15 => '<span class="S_AT" title="Runtime Error">Runtime Error</span>',
+	];
+	
+	$result=$result*1;
+	$r=$ra[$result];
+	if($result===RS_CE || $result===RS_RF){
+		if($submit_id!==''){
+			$r='<a href="/submit/compileinfo/?sid='.$submit_id.'" target="_blank">'.$r.'</a>';
+		}
+	}
+	return $r;
+}
+
+function submitResultVerb($result) 
+{
+	static $ra = [
+    	0 => '<span class="S_AC">solved</span>',
+		1 => '<span class="S_PE" title="Presentation Error">Presentation Error</span>',
+		2 => '<span class="S_TL" title="Time Limit Exceed">tried</span>',
+		3 => '<span class="S_ML" title="Memory Limit Exceed">tried</span>',
+		4 => '<span class="S_WA" title="Wrong Answer">tried</span>',
+		5 => '<span class="S_RE" title="Runtime Error">tried</span>',
+		6 => '<span class="S_OL" title="Output Limit Exceed">tried</span>',
+		7 => '<span class="S_CE" title="Compile Error">tried</span>',
+		8 => '<span class="S_SE" title="System Error">tried</span>',
+		9 => '<span class="S_VE" title="Validate Error">tried</span>',
+		10 => '<span class="S_WT" title="Waiting">submit</span>',
+		11 => '<span class="S_WT" title="Rejudging">submit</span>',
+		12 => '<span class="S_WT" title="Judging">submit</span>',
+		13 => '<span class="S_WT" title="Compiling">submit</span>',
+		14 => '<span class="S_RF" title="Restricted Function">tried</span>',
+		15 => '<span class="S_AT" title="Runtime Error">tried</span>',
+	];
+	
+	$result=$result*1;
+	$r=$ra[$result];
+	return $r;
+}
+
 function truncateTitle($str, $words=50)
 {
-	return HTML::entities(Str::words(trim(strip_tags($str)), $words));	
+	$str = strip_tags($str);
+	$str = Str::words($str, $words);
+	$str = preg_replace('/\s+/', ' ',$str);
+	$str = trim($str);
+	return HTML::entities($str);	
 }
 
 function countriesCode(){

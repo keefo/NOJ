@@ -1,6 +1,7 @@
 <?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Submit extends Model {
 
@@ -30,4 +31,7 @@ class Submit extends Model {
 	protected $hidden = [];
 	
 
+	public function relativeCreatedDate(){
+		return Carbon::createFromTimeStamp(strtotime($this->created_at))->diffForHumans();
+	}
 }

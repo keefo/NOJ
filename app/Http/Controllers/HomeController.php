@@ -1,5 +1,17 @@
 <?php namespace App\Http\Controllers;
 
+
+use App\Models\User;
+use App\Models\Problem;
+use App\Models\Code;
+use App\Models\Submit;
+use Illuminate\Database\Eloquent\Model;
+use Paginator;
+use Session;
+use Input;
+use DB;
+
+
 class HomeController extends Controller {
 
 	/*
@@ -30,7 +42,12 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		$submits = Submit::orderBy('submits.id', 'desc')->
+		leftJoin('users','users.id','=','submits.user_id')->
+		leftJoin('problems','problems.id','=','submits.problem_id')->
+		select(array('submits.*','users.name as username','problems.title as problemtitle'))->
+		paginate(25);
+		return view('home', compact('submits'));
 	}
 
 }

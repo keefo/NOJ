@@ -43,7 +43,7 @@
 			
 			<ul class="nav navbar-nav">
 				<li><a href="{{ url('/problems') }}">Problems</a></li>
-				<li><a href="#">Judge</a></li>
+				<li><a href="{{ url('/submit') }}">Judge</a></li>
 				<li><a href="#">Tutorial</a></li>
 				<li><a href="#">Blog</a></li>
 				<li><a href="{{ url('/help') }}">Help</a></li>
