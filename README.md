@@ -13,6 +13,54 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 7. Config .env.example file to .env file and edit it to map your local environment.
 8. Start coding add new features.
 
+## DevLogs
+
+### Modify Laravel AuthController to support email and username login
+
+By default the Laravel auth module support only email authentication. To support email or username login, we need to modify the ```App\Http\Controllers\Auth\AuthController```
+
+add to the header of the file:
+
+	use Auth;
+	use Input;
+
+
+add this into the AuthController class:
+
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array  $data
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */
+	
+	public function postLogin(Request $request)
+	{
+	    $this->validate($request, [
+	        'inputid' => 'required',
+	        'password' => 'required',
+	    ]);
+		
+		$field = filter_var($request->input('inputid'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+		$request->merge([$field => $request->input('inputid')]);
+		
+	    if ($this->auth->attempt($request->only($field, 'password'), $request->has('remember')))
+	    {
+	        return redirect()->intended($this->redirectPath());
+	    }
+	
+	    return redirect($this->loginPath())
+	                ->withInput($request->only('inputid', 'remember'))
+	                ->withErrors([
+	                    'inputid' => 'This credential do not match our records.',
+	                ]);
+	}
+
+replace the email input in ```resources\views\auth\login.blade.php``` with
+
+	{!! Form::text('inputid', Input::old('inputid'), array('tabindex' => '1', 'class' => 'form-control')) !!}
+
+
 ## Contributors
 
 **Xu Lian** - a Mac and iOS developer, the founder of  [Beyondcow](https://www.beyondcow.com), follow him on Twitter or Github.
