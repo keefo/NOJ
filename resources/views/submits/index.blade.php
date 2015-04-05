@@ -24,7 +24,7 @@
 			<tr class="plist-item" id="p_{{ $submit->id }}">
 				<td class="text-center">{{ $submit->id }}</td>
 				<td>
-					<a href="{{ url('/user') }}">{{ $submit->username }}</a>
+					<a href="#">{{ $submit->username }}</a>
 				</td>
 				<td>
 					<a href="{{ url('/problems', $submit->problemslug) }}">{{ $submit->problemtitle }}</a>
