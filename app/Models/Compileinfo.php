@@ -1,8 +1,6 @@
 <?php namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Compileinfo extends Model {
+class Compileinfo extends BaseModel {
 
 	protected $table = 'compileinfos';
 	public $timestamps = false;

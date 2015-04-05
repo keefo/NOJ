@@ -1,9 +1,7 @@
 <?php namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
-class Submit extends Model {
+class Submit extends BaseModel {
 
 	protected $table = 'submits';
 
@@ -31,10 +29,6 @@ class Submit extends Model {
 	protected $hidden = [];
 	
 
-	public function relativeCreatedDate(){
-		return Carbon::createFromTimeStamp(strtotime($this->created_at))->diffForHumans();
-	}
-	
 	public function language(){
 		//gcc -O2 -std=gnu99 -fno-asm -lm -Wall -w -static -DONLINE_JUDGE
 		//g++ -O2 -std=gnu++0x -fno-asm -lm -Wall -w -static -DONLINE_JUDGE

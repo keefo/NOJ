@@ -1,8 +1,6 @@
 <?php namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Contestproblem extends Model {
+class Contestproblem extends BaseModel {
 
 	protected $table = 'contestproblems';
 	public $timestamps = false;

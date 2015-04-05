@@ -1,8 +1,6 @@
 <?php namespace App\Models;
-	
-use Illuminate\Database\Eloquent\Model;
 
-class Contestattend extends Model {
+class Contestattend extends BaseModel {
 
 	protected $table = 'contestattends';
 	

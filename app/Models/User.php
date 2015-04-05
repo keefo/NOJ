@@ -1,12 +1,11 @@
 <?php namespace App\Models;
 	
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class User extends BaseModel implements AuthenticatableContract, CanResetPasswordContract {
 
 	use Authenticatable, CanResetPassword;
 
@@ -125,6 +124,30 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
 	    $decrypted_string = mcrypt_decrypt(MCRYPT_BLOWFISH, $key, $encrypted_string, MCRYPT_MODE_ECB, $iv);
 	    return trim($decrypted_string);
+	}
+	
+	public function isTeamMember()
+	{
+		//role 0:member 1:acmteam 2:oldacmteam 4:contributor 8:admin
+		return ($this->role*1 & 1)>0;
+	}
+	
+	public function isOldTeamMember()
+	{
+		//role 0:member 1:acmteam 2:oldacmteam 4:contributor 8:admin
+		return ($this->role*1 & 2)>0;
+	}
+	
+	public function isContributor()
+	{
+		//role 0:member 1:acmteam 2:oldacmteam 4:contributor 8:admin
+		return ($this->role*1 & 4)>0;
+	}
+	
+	public function isAdmin()
+	{
+		//role 0:member 1:acmteam 2:oldacmteam 4:contributor 8:admin
+		return ($this->role*1 & 8)>0;
 	}
 
 }
