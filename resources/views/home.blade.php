@@ -7,11 +7,7 @@
 			
 			@foreach ($submits as $submit)
 				<div class="feed-item">
-					{!! $submit->feedIcon() !!}
-					<a href="{{ url('/user') }}">{{ $submit->username }}</a>
-					{!! $submit->resultVerb() !!}
-					the problem <a href="{{ url('/problems') }}">{{ $submit->problemtitle }}</a>
-					<span class="date">{{ $submit->relativeCreatedDate() }}</span>
+					{!! $submit->feedContent() !!}
 				</div>
 			@endforeach
 			

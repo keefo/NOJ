@@ -42,11 +42,7 @@ class SubmitController extends Controller {
 	{
 		//$results = Code::firstOrFail();
 		//dd($results->code());
-		$submits = Submit::orderBy('submits.id', 'desc')->
-		leftJoin('users','users.id','=','submits.user_id')->
-		leftJoin('problems','problems.id','=','submits.problem_id')->
-		select(array('submits.*','users.name as username','problems.title as problemtitle','problems.slug as problemslug'))->
-		paginate(20);
+		$submits = Submit::getSubmitsWithPageSize(20);
 		return view('submits.index', compact('submits'));
 	}
 	

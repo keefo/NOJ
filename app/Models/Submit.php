@@ -147,4 +147,17 @@ class Submit extends Model {
 		return '<span class="glyphicon glyphicon-remove"></span>';
 	}
 	
+	public function feedContent(){
+		return '<a href="'.url('/user').'">'.$this->username.'</a> '.$this->resultVerb().' the problem <a href="'.url('/problems', $this->problemslug).'">'.$this->problemtitle.'</a> <span class="date">'.$this->relativeCreatedDate().'</span>';
+	}
+	
+	public static function getSubmitsWithPageSize($pagelen=20){
+		$submits = Submit::orderBy('submits.id', 'desc')->
+		leftJoin('users','users.id','=','submits.user_id')->
+		leftJoin('problems','problems.id','=','submits.problem_id')->
+		select(array('submits.*','users.name as username','problems.title as problemtitle','problems.slug as problemslug'))->
+		paginate($pagelen);
+		return $submits;
+	}
+	
 }

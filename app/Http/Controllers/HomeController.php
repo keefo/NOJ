@@ -42,11 +42,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		$submits = Submit::orderBy('submits.id', 'desc')->
-		leftJoin('users','users.id','=','submits.user_id')->
-		leftJoin('problems','problems.id','=','submits.problem_id')->
-		select(array('submits.*','users.name as username','problems.title as problemtitle'))->
-		paginate(30);
+		$submits = Submit::getSubmitsWithPageSize(30);
 		return view('home', compact('submits'));
 	}
 
