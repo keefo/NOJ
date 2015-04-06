@@ -202,7 +202,8 @@ return [
 		'Paginator' => 'Illuminate\Pagination\Paginator',
 		'Sentry'    => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Online' 	=> 'App\Models\Online',
-
+		'Admin' 	=> 'App\Models\Admin\Admin',
+		'HtmlBuilder' => 'App\Html\HtmlBuilder',
 	],
 
 ];

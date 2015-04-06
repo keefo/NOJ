@@ -12,11 +12,14 @@ use App\Models\Contestproblem;
 use App\Models\Problem;
 use App\Models\Submit;
 use App\Models\User;
+use App\Models\Admin\Admin;
+use App\Models\Admin\MenuItem;
 use Paginator;
 use Session;
 use Input;
 use DB;
 use Auth;
+use View;
 
 class AdminController extends Controller {
 
@@ -30,7 +33,7 @@ class AdminController extends Controller {
 	| controller as you wish. It is just here to get your app started!
 	|
 	*/
-
+	public $menu;
 	/**
 	 * Create a new controller instance.
 	 *
@@ -39,10 +42,17 @@ class AdminController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('auth');
-		if(!Auth::user()->isAdmin()){
-			header('Location: '.url('home'));
-			exit;
-		}
+		
+		Admin::admin();//this class will guard admin user.
+				
+		$this->menu=array();
+		
+		$this->menu[]=new MenuItem('Dashboard', url('admin/'), 'fa-dashboard');
+		$this->menu[]=new MenuItem('User', url('admin/users'), 'fa-users');
+		$this->menu[]=new MenuItem('Problem', url('admin/problems'), 'fa-book');
+		$this->menu[]=new MenuItem('Article', url('admin/articles'), 'fa-newspaper-o');
+		
+		 View::share('menu', $this->menu);
 	}
 	
 	/**

@@ -31,16 +31,16 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/admin/"><img class="navbar-logo" src="{{ url('/img/logo.png') }}" /> NOJ Admin</a>
+			<span class="navbar-brand"><a href="{{ url('/') }}" title="home page"><img class="navbar-logo" src="{{ url('/img/logo.png') }}" /></a> <a href="{{ url('admin') }}" title="admin panel">NOJ Admin</a></span>
 		</div>
 		
 		<ul class="nav navbar-top-links navbar-right">
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
+					<i class="fa fa-user fa-fw"></i> {{ Admin::admin()->name }} <i class="fa fa-caret-down"></i>
 				</a>
 				<ul class="dropdown-menu dropdown-user">
-					<li><a href="{{ url('admin/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+					<li><a href="{{ url('home') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -48,11 +48,9 @@
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav collapse in" id="side-menu">
-									<li class="active"><a href="http://sleepingowladmindemo.cloudcontrolled.com/admin" class="active"><i class="fa fa-fw fa-dashboard"></i> Start page</a></li>
-									<li><a href="http://sleepingowladmindemo.cloudcontrolled.com/admin/contacts"><i class="fa fa-fw fa-users"></i> Contacts</a></li>
-									<li><a href="http://sleepingowladmindemo.cloudcontrolled.com/admin/companies"><i class="fa fa-fw fa-building"></i> Companies</a></li>
-									<li><a href="http://sleepingowladmindemo.cloudcontrolled.com/admin/countries"><i class="fa fa-fw fa-globe"></i> Countries</a></li>
-									<li><a href="#"><i class="fa fa-fw fa-bookmark"></i> Custom<span class="fa arrow"></span></a><ul class="nav nav-second-level collapse"><li><a href="http://sleepingowladmindemo.cloudcontrolled.com/admin/my_second_admin_page"><i class="fa fa-fw "></i> Custom admin page</a></li><li><a href="http://sleepingowladmindemo.cloudcontrolled.com/admin/subdir/demo"><i class="fa fa-fw "></i> Custom url</a></li></ul></li>
+					@foreach ($menu as $item)
+						{!! $item->render() !!}
+					@endforeach
 				</ul>
 			</div>
 		</div>
