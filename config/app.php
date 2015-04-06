@@ -146,9 +146,9 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		
-		'SleepingOwl\Admin\AdminServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
-
+		'Cartalyst\Sentry\SentryServiceProvider',
+		
 	],
 
 	/*
@@ -200,15 +200,8 @@ return [
 		'Form'		=> 'Illuminate\Html\FormFacade',
 		'HTML'		=> 'Illuminate\Html\HtmlFacade',
 		'Paginator' => 'Illuminate\Pagination\Paginator',
-		
-		'Admin'             => 'SleepingOwl\Admin\Admin',
-		'AdminAuth'         => 'SleepingOwl\AdminAuth\Facades\AdminAuth',
-		'AdminRouter'       => 'SleepingOwl\Admin\Facades\AdminRouter',
-		'AssetManager'      => 'SleepingOwl\Admin\AssetManager\AssetManager',
-		'Column'            => 'SleepingOwl\Admin\Columns\Column',
-		'FormItem'          => 'SleepingOwl\Admin\Models\Form\FormItem',
-		'ModelItem'         => 'SleepingOwl\Admin\Models\ModelItem',
-
+		'Sentry'    => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+		'Online' 	=> 'App\Models\Online',
 
 	],
 

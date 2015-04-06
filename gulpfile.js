@@ -20,7 +20,9 @@ var paths = {
 }
 
 elixir(function(mix) {
+
 	mix.less('app.less')
+		.less('admin.less')
 		.copy([
 			paths.fontawesome + 'css/font-awesome.min.css',
 			paths.fontawesome + 'css/font-awesome.css.map',

@@ -28,3 +28,6 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+Route::get('admin', 'AdminController@index');
+
+Online::updateCurrent();

@@ -60,7 +60,6 @@ Admin::model(\App\Models\Article::class)
            })
          ->form(function () {
 		 	//dd(Auth::user());
-/*
 		 	
 		 	FormItem::register('text', function ($instance)
 			{
@@ -68,7 +67,7 @@ Admin::model(\App\Models\Article::class)
 			    if ($instance->exists)
 			    {
 			        // editing form
-				    return '<input type="text" value="'.Auth::user()->id.'" />';
+				    return '<input type="text" class="form-control" id="title" name="title" value="'.Auth::user()->id.'" /></div>';
 				} 
 				else
 			    {
@@ -76,7 +75,7 @@ Admin::model(\App\Models\Article::class)
 				}
 			});
 			
-*/
+
 	        FormItem::text('title', 'Title');
 	        FormItem::textarea('content', 'Content');
 	        FormItem::checkbox('published', 'Published');

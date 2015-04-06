@@ -8,6 +8,8 @@
 //@navbar-height: 55px;
 //@navbar-padding-v: (@navbar-height - 22)/2px;
 @light-gray-color: #ccc;
+@font-bold: 500;
+@font-bolder: 700;
 
 body, label, .checkbox label {
 	font-weight: 300;
@@ -50,7 +52,7 @@ a {
 
 .navbar{
 	.navbar-brand{
-		font-weight: bolder;
+		font-weight: @font-bolder;
 		color: #111;
 			&:hover {
 		  		color: @link-color;
@@ -66,7 +68,7 @@ a {
 	  	li {
 			a {
 			  font-size: 13px;
-			  font-weight: bold;
+			  font-weight: 500;
 			  padding-left:8px;
 			  padding-right:8px;
 			  color: #333;
@@ -255,7 +257,7 @@ a {
 	
 }
 .submits{
-	.S_AC{color:#090;font-weight:bolder;}
+	.S_AC{color:#090;font-weight:@font-bold;}
 	.S_TL{color:#900}
 	.S_ML{color:#900}
 	.S_WA{color:#900}
