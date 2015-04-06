@@ -44,7 +44,9 @@ class AdminController extends Controller {
 		$this->middleware('auth');
 		
 		Admin::admin();//this class will guard admin user.
-				
+		
+		parent::__construct();
+		
 		$this->menu=array();
 		
 		$this->menu[]=new MenuItem('Dashboard', url('admin/'), 'fa-dashboard');
@@ -63,6 +65,23 @@ class AdminController extends Controller {
 	public function index()
 	{
 		return view('admin.index');
+	}
+	
+	
+	public function articles()
+	{
+		return view('admin.table');
+	}
+	
+	public function users()
+	{
+		return view('admin.table');
+	}
+	
+	
+	public function problems()
+	{
+		return view('admin.table');
 	}
 
 }

@@ -29,5 +29,8 @@ Route::controllers([
 ]);
 
 Route::get('admin', 'AdminController@index');
+Route::get('admin/articles', 'AdminController@articles');
+Route::get('admin/problems', 'AdminController@problems');
+Route::get('admin/users', 'AdminController@users');
 
-Online::updateCurrent();
+

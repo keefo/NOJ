@@ -10,7 +10,7 @@ use Paginator;
 use Session;
 use Input;
 use DB;
-
+use Online;
 
 class HomeController extends Controller {
 
@@ -33,6 +33,7 @@ class HomeController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('auth');
+		parent::__construct();
 	}
 
 	/**
@@ -42,8 +43,12 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+		$totalGuests = Online::guests()->count();
+		$totalUsers = Online::registered()->count();
+		$onlineUsers = Online::registered()->get();
+		
 		$submits = Submit::getSubmitsWithPageSize(30);
-		return view('home', compact('submits'));
+		return view('home', compact('submits', 'onlineUsers', 'totalGuests', 'totalUsers'));
 	}
 
 }

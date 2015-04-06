@@ -1,8 +1,8 @@
 <?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Session;
+use Auth;
 
 class Online extends Model {
 
@@ -46,9 +46,16 @@ class Online extends Model {
      */
     public function scopeUpdateCurrent($query)
     {
+	
+	    return $query->where('id', Session::getId())->update(array(
+            'user_id' => !Auth::guest() ? Auth::user()->id : null
+        ));
+        
+/*
         return $query->where('id', Session::getId())->update(array(
             'user_id' => Sentry::check() ? Sentry::getUser()->id : null
         ));
+*/
     }
 
     /**
@@ -58,7 +65,8 @@ class Online extends Model {
      */
     public function user()
     {
-        return $this->belongsTo('Cartalyst\Sentry\Users\EloquentUser'); # Sentry 3
+	    return $this->belongsTo('App\Models\User');
+        //return $this->belongsTo('Cartalyst\Sentry\Users\EloquentUser'); # Sentry 3
         // return $this->belongsTo('Cartalyst\Sentry\Users\Eloquent\User'); # Sentry 2
     }
 

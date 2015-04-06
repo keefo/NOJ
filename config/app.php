@@ -147,7 +147,6 @@ return [
 		'App\Providers\RouteServiceProvider',
 		
 		'Illuminate\Html\HtmlServiceProvider',
-		'Cartalyst\Sentry\SentryServiceProvider',
 		
 	],
 
@@ -200,7 +199,6 @@ return [
 		'Form'		=> 'Illuminate\Html\FormFacade',
 		'HTML'		=> 'Illuminate\Html\HtmlFacade',
 		'Paginator' => 'Illuminate\Pagination\Paginator',
-		'Sentry'    => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Online' 	=> 'App\Models\Online',
 		'Admin' 	=> 'App\Models\Admin\Admin',
 		'HtmlBuilder' => 'App\Html\HtmlBuilder',
