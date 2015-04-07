@@ -210,6 +210,11 @@ a {
 	&:active{
 	    background-color: darken(#d43a2b, 15%);
 	}
+	&:disabled,
+	&.disabled{
+	    background-color: #aaa;
+	    color: #000;
+	}
 }
 .login_github {
 	background-color: #343434;
@@ -219,6 +224,13 @@ a {
 	&:active{
 	    background-color: darken(#343434, 15%);
 	}
+	&:disabled{
+	    background-color: #aaa;
+	}
+	&:disabled,
+	&.disabled{
+	    background-color: #aaa;
+	}
 }
 .login_twitter{
 	background-color: #019FE9;
@@ -227,6 +239,10 @@ a {
 	}
 	&:active{
 	    background-color: darken(#019FE9, 15%);
+	}
+	&:disabled,
+	&.disabled{
+	    background-color: #aaa;
 	}
 }
 

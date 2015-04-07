@@ -17,7 +17,6 @@ use App\Models\Admin\MenuItem;
 use Paginator;
 use Session;
 use Input;
-use DB;
 use Auth;
 use View;
 use Socialize;
@@ -51,12 +50,9 @@ class LoginController extends Controller {
 	    {
 		   	
 	        $userData = $provider->user();
-	        
-			$ojuser = DB::table('users')
-                    ->where('name', '=', $userData->nickname)
-                    ->orWhere('email', $userData->email)
-                    ->first();
-            
+
+            $ojuser = User::where('name', $userData->nickname)->orWhere('email', $userData->email)->first();
+		
             if($ojuser==null){
 	            
 	           	$date = Carbon::now();

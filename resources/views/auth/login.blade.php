@@ -72,6 +72,16 @@
 	
 </div>
 
-
-
 @endsection
+
+@section('scripts')
+<script>
+$(function(){
+	$('.loginbtn').click(function(){
+		$(this).prop('disabled', true).attr('disabled', true).addClass('disabled');
+	})
+});
+</script>
+@stop
+
+
