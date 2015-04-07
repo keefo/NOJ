@@ -21,41 +21,6 @@
 	<![endif]-->
 </head>
 <body class="signup-page">
-
-<nav class="navbar navbar-default">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle Navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/"><img class="navbar-logo" src="{{ url('/img/logo.png') }}" /> NOJ</a>
-		</div>
-
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="{{ url('/problems') }}">Problems</a></li>
-				<li><a href="{{ url('/problems') }}">Judge</a></li>
-				<li><a href="#">Tutorial</a></li>
-				<li><a href="#">Blog</a></li>
-				<li><a href="{{ url('/help') }}">Help</a></li>
-    		</ul>
-			
-			<ul class="nav navbar-nav navbar-right">
-				<li><p class="navbar-btn">
-                    <a href="{{ url('/auth/register') }}" class="btn btn-success">Sign up</a>
-                </p></li>
-                <li><p class="navbar-btn">
-                    <a href="{{ url('/auth/login') }}" class="btn btn-default">Sign in</a>
-                </p></li>
-			</ul>
-		</div>
-	</div>
-</nav>
-	
-<!--
 	
 	<nav class="navbar navbar-default">
 		<div class="container">
@@ -68,26 +33,28 @@
 				</button>
 				<a class="navbar-brand" href="/"><img class="navbar-logo" src="{{ url('/img/logo.png') }}" /> NOJ</a>
 			</div>
-
+	
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/problems') }}">Problems</a></li>
-					<li><a href="#">Judge</a></li>
+					<li><a href="{{ url('/problems') }}">Judge</a></li>
 					<li><a href="#">Tutorial</a></li>
 					<li><a href="#">Blog</a></li>
 					<li><a href="{{ url('/help') }}">Help</a></li>
-        		</ul>
+	    		</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
-					<li class="btnli"><a class="btn btn-xs btn-success" href="{{ url('/auth/register') }}">Sign up</a></li>
-					<li class="btnli"><a class="btn btn-xs btn-default" href="{{ url('/auth/login') }}">Sign in</a></li>
+					<li><p class="navbar-btn">
+	                    <a href="{{ url('/auth/register') }}" class="btn btn-success">Sign up</a>
+	                </p></li>
+	                <li><p class="navbar-btn">
+	                    <a href="{{ url('/auth/login') }}" class="btn btn-default">Sign in</a>
+	                </p></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
--->
-
+		
 	@yield('content')
 
 	<!-- Site footer -->
@@ -107,6 +74,7 @@
 				</div>
 				<div class="col-md-5 text-right">
 					<ul class="list-inline">
+						<li><a href="https://github.com/keefo/NOJ" target="_blank">Github</a></li>
 						<li><a href="#">Status</a></li>
 						<li><a href="#">Blog</a></li>
 						<li><a href="#">About</a></li>

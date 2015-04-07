@@ -90,6 +90,7 @@
 				</div>
 				<div class="col-md-5 text-right">
 					<ul class="list-inline">
+						<li><a href="https://github.com/keefo/NOJ" target="_blank">Github</a></li>
 						<li><a href="#">Status</a></li>
 						<li><a href="#">Blog</a></li>
 						<li><a href="#">About</a></li>
