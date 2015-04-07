@@ -15,7 +15,7 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 
 ## DevLogs
 
-### Modify Laravel AuthController to support email and username login
+### 1. Modify Laravel AuthController to support email and username login
 
 By default the Laravel auth module support only email authentication. To support email or username login, we need to modify the ```App\Http\Controllers\Auth\AuthController```
 
@@ -59,6 +59,47 @@ add this into the AuthController class:
 replace the email input in ```resources\views\auth\login.blade.php``` with
 
 	{!! Form::text('inputid', Input::old('inputid'), array('tabindex' => '1', 'class' => 'form-control')) !!}
+
+
+### 2. Added GitHub login support
+
+add to ```composer.json``` file:
+
+	"laravel/socialite": "~2.0"
+
+run
+
+	composer update
+	
+add following lines to ```App\Http\routes.php``` file:
+
+	Route::get('login/{service}', array('uses' => 'LoginController@index'));
+	Route::get('loginerror/{message}', array('uses' => 'LoginController@error'));
+
+add following lines ```config\services.php``` file:
+
+	'github' => [
+	    'client_id' => env('GITHUB_CLIENT_ID'),
+	    'client_secret' => env('GITHUB_CLIENT_SECRET'),
+	    'redirect' => env('GITHUB_CALLBACK_URL'),
+	],
+	
+	'twitter' => [
+	    'client_id' => env('TWITTER_CLIENT_ID'),
+	    'client_secret' => env('TWITTER_CLIENT_SECRET'),
+	    'redirect' => env('TWITTER_CALLBACK_URL'),
+	],
+	
+	'google' => [
+	    'client_id' => env('GOOGLE_CLIENT_ID'),
+	    'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+	    'redirect' => env('GOOGLE_CALLBACK_URL'),
+	],
+
+
+remember to put all your app keys into .env file.
+
+finally, create a controller ```App\Http\Controllers\LoginController.php``` and add corresponding login button into login view.
 
 
 ## Contributors
