@@ -13,7 +13,7 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 7. Config .env.example file to .env file and edit it to map your local environment.
 8. Start coding add new features.
 
-## DevLogs
+## Some DevLogs
 
 ### 1. Modify Laravel AuthController to support email and username login
 
