@@ -55,8 +55,8 @@
 						<div class="col-md-5">
 							<div class="col-md-10 col-md-offset-1">
 								<strong>Or you can sign in with:</strong>
-								<a href="#" class="login_github loginbtn"><i class="fa fa-github"></i> Sign in with Github</a>
-								<a href="#" class="login_google loginbtn"><i class="fa fa-google"></i> Sign in with Google</a>
+								<a href="{{ url('/login/github') }}" class="login_github loginbtn"><i class="fa fa-github"></i> Sign in with Github</a>
+								<a href="{{ url('/login/google') }}" class="login_google loginbtn"><i class="fa fa-google"></i> Sign in with Google</a>
 							</div>
 						</div>
 					</div>

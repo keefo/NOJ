@@ -150,6 +150,7 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
 		return ($this->role*1 & 8)>0;
 	}
 
+
 }
 
 

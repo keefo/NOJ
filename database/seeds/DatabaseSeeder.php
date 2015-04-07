@@ -185,7 +185,7 @@ class ProblemTableSeeder extends Seeder {
 		$hash = array();
 		$i=1;
 		$n=count($list);
-		$date = new DateTime;
+		$date = new DateTime();
 		
 		foreach ($list as $item)
 		{

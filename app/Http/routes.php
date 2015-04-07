@@ -23,6 +23,9 @@ Route::post('submit', 'SubmitController@post');
 //Route::resource('problems', 'ProblemController');
 //Route::resource('problems/{id}', 'ProblemController@show');
 
+Route::get('login/{service}', array('uses' => 'LoginController@index'));
+
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

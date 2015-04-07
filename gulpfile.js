@@ -21,8 +21,7 @@ var paths = {
 
 elixir(function(mix) {
 
-	mix.less('app.less')
-		.less('admin.less')
+	mix.less(['app.less','admin.less'], 'public/css/')
 		.copy([
 			paths.fontawesome + 'css/font-awesome.min.css',
 			paths.fontawesome + 'css/font-awesome.css.map',
@@ -35,9 +34,7 @@ elixir(function(mix) {
 			paths.fontawesome + 'fonts/fontawesome-webfont.woff2',
 			paths.fontawesome + 'fonts/FontAwesome.otf',
 		], paths.pubfont )
-		.copy([
-		   paths.pubfont + '*',
-		], paths.budfont )
+		.copy([paths.pubfont + '*'], paths.budfont )
 		.version( paths.pubcss + 'app.css')
 		.phpUnit();
 });

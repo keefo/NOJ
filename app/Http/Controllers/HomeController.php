@@ -44,8 +44,8 @@ class HomeController extends Controller {
 	public function index()
 	{
 		$totalGuests = Online::guests()->count();
-		$totalUsers = Online::registered()->count();
 		$onlineUsers = Online::registered()->get();
+		$totalUsers = count($onlineUsers);
 		
 		$submits = Submit::getSubmitsWithPageSize(30);
 		return view('home', compact('submits', 'onlineUsers', 'totalGuests', 'totalUsers'));

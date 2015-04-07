@@ -147,6 +147,8 @@ return [
 		'App\Providers\RouteServiceProvider',
 		
 		'Illuminate\Html\HtmlServiceProvider',
+		'Laravel\Socialite\SocialiteServiceProvider',
+		
 		
 	],
 
@@ -202,6 +204,8 @@ return [
 		'Online' 	=> 'App\Models\Online',
 		'Admin' 	=> 'App\Models\Admin\Admin',
 		'HtmlBuilder' => 'App\Html\HtmlBuilder',
+		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
+		
 	],
 
 ];

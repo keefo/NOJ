@@ -35,7 +35,7 @@ class Online extends Model {
      */
     public function scopeRegistered($query)
     {
-        return $query->whereNotNull('user_id')->with('user');
+        return $query->whereNotNull('user_id')->groupBy('user_id')->with('user');
     }
 
     /**
