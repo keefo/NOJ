@@ -23,6 +23,7 @@ use View;
 use Socialize;
 use Request;
 use Carbon\Carbon;
+use Redirect;
 
 class LoginController extends Controller {
 
@@ -48,6 +49,7 @@ class LoginController extends Controller {
 		$provider = Socialize::with($service);
 	    if (Input::has('code') || Input::has('oauth_token'))
 	    {
+		   	
 	        $userData = $provider->user();
 	        
 			$ojuser = DB::table('users')
@@ -60,6 +62,13 @@ class LoginController extends Controller {
 	           	$date = Carbon::now();
 	           	$ip = Request::ip();
 	           	$pwd = $userData->token;
+	           	
+	           	if($userData->email==null){
+		           	/*
+			           	TODO: handle no email oauth more user friendly.
+		           	*/
+		           	return new RedirectResponse(url('loginerror','OAuth require email address to login'));
+	           	}
 	           	
 	            $ojuser = User::create([
 			        'created_by'		   => 1,
@@ -142,5 +151,11 @@ class LoginController extends Controller {
 	        return $provider->redirect();
 	    }
 	}
+	
+	public function error($message='')
+	{
+		return view('message', compact('message'));
+	}
+		
 	
 }

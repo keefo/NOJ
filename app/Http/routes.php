@@ -24,6 +24,7 @@ Route::post('submit', 'SubmitController@post');
 //Route::resource('problems/{id}', 'ProblemController@show');
 
 Route::get('login/{service}', array('uses' => 'LoginController@index'));
+Route::get('loginerror/{message}', array('uses' => 'LoginController@error'));
 
 
 Route::controllers([
