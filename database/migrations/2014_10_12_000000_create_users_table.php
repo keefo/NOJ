@@ -68,6 +68,8 @@ class CreateUsersTable extends Migration {
 			$table->string('github_access_token', 128);
 			$table->string('google_avatar_url', 255);
 			$table->string('google_access_token', 128);
+			$table->string('twitter_avatar_url', 255);
+			$table->string('twitter_access_token', 128);
 			
 			$table->index('email');
 			$table->index('name');
@@ -76,6 +78,7 @@ class CreateUsersTable extends Migration {
 			$table->index('qq');
 			$table->index('github_access_token');
 			$table->index('google_access_token');
+			$table->index('twitter_access_token');
 			
 			
 		});

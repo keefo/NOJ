@@ -39,57 +39,16 @@ class LoginController extends Controller {
 	 */
 	public function index($service='')
 	{
-		if($service!=='github' && $service!=='google'){
+		if($service!=='github' && 
+		$service!=='google' && 
+		$service!=='twitter'){
 			return new RedirectResponse(url('/'));
 		}
 		
 		$provider = Socialize::with($service);
-	    if (Input::has('code'))
+	    if (Input::has('code') || Input::has('oauth_token'))
 	    {
 	        $userData = $provider->user();
-	        //dd($userData->user['url']);
-	        /*
-		        User {▼
-  +token: "511a6fdd62e521fa5d1114a16742be30a9adadca"
-  +id: 809588
-  +nickname: "keefo"
-  +name: "Xu Lian"
-  +email: "lianxu@me.com"
-  +avatar: "https://avatars.githubusercontent.com/u/809588?v=3"
-  +"user": array:30 [▼
-    "login" => "keefo"
-    "id" => 809588
-    "avatar_url" => "https://avatars.githubusercontent.com/u/809588?v=3"
-    "gravatar_id" => ""
-    "url" => "https://api.github.com/users/keefo"
-    "html_url" => "https://github.com/keefo"
-    "followers_url" => "https://api.github.com/users/keefo/followers"
-    "following_url" => "https://api.github.com/users/keefo/following{/other_user}"
-    "gists_url" => "https://api.github.com/users/keefo/gists{/gist_id}"
-    "starred_url" => "https://api.github.com/users/keefo/starred{/owner}{/repo}"
-    "subscriptions_url" => "https://api.github.com/users/keefo/subscriptions"
-    "organizations_url" => "https://api.github.com/users/keefo/orgs"
-    "repos_url" => "https://api.github.com/users/keefo/repos"
-    "events_url" => "https://api.github.com/users/keefo/events{/privacy}"
-    "received_events_url" => "https://api.github.com/users/keefo/received_events"
-    "type" => "User"
-    "site_admin" => false
-    "name" => "Xu Lian"
-    "company" => "http://www.beyondcow.com/"
-    "blog" => "http://www.lianxu.me/"
-    "location" => "Vancouver"
-    "email" => "lianxu@me.com"
-    "hireable" => true
-    "bio" => null
-    "public_repos" => 65
-    "public_gists" => 20
-    "followers" => 204
-    "following" => 37
-    "created_at" => "2011-05-25T10:33:31Z"
-    "updated_at" => "2015-04-07T05:07:39Z"
-  ]
-}
-		        */
 	        
 			$ojuser = DB::table('users')
                     ->where('name', '=', $userData->nickname)

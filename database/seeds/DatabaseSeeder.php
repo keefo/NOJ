@@ -147,6 +147,8 @@ class UserTableSeeder extends Seeder {
 				'github_access_token'  => $item->github_access_token,
 				'google_avatar_url'    => $item->google_avatar_url,
 				'google_access_token'  => $item->google_access_token,
+		    	'twitter_avatar_url'    => '',
+				'twitter_access_token'  => '',
 		    ]);
 		  
 		     
