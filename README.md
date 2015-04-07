@@ -15,9 +15,8 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 
 ## Some DevLogs
 
-### [1. Modify Laravel AuthController to support email and username login](https://github.com/keefo/NOJ/wiki/1.-Add-email-and-username-login-support)
-
-### [2. Added GitHub login support](https://github.com/keefo/NOJ/wiki/2.-Add-GitHub-login-support)
+1. [Modify Laravel AuthController to support email and username login](https://github.com/keefo/NOJ/wiki/1.-Add-email-and-username-login-support)
+2. [Added GitHub login support](https://github.com/keefo/NOJ/wiki/2.-Add-GitHub-login-support)
 
 ## Contributors
 
