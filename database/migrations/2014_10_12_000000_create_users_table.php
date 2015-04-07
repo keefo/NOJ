@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->string('passwordhash', 60);
 			
 			
+			$table->boolean('disabled');
 			$table->string('email', 255)->unique();
 			$table->boolean('emailprivate');
 			$table->string('name', 45)->unique();

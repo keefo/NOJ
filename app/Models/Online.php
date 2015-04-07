@@ -46,8 +46,26 @@ class Online extends Model {
      */
     public function scopeUpdateCurrent($query)
     {
-	
-	    return $query->where('id', Session::getId())->update(array(
+	    if(Auth::guest()){
+		    return $query->where('id', Session::getId())->update(array(
+	            'user_id' => null
+	        ));
+	    }else{
+		    $session = $query->where('id', Session::getId())->first();
+			if($session->user_id==null){
+			    $session->user_id = Auth::user()->id;
+				$session->save();
+			}else if($session->forced_logout){
+				$session->forced_logout = null;
+				$session->user_id = null;
+				$session->save();
+			    Auth::logout();
+			    return redirect('/');
+			}
+			return $session;
+	    }
+
+	    return $session->update(array(
             'user_id' => !Auth::guest() ? Auth::user()->id : null
         ));
         

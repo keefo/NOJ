@@ -17,6 +17,7 @@ class CreateSessionTable extends Migration {
 			$t->text('payload');
 			$t->integer('last_activity');
 			$t->integer('user_id')->nullable();
+			$t->boolean('forced_logout')->nullable();
 		});
 	}
 
