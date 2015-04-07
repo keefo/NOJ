@@ -48,8 +48,6 @@
 	
 	<!-- Usage as a class -->
 	<div class="clearfix"></div>
-
+	
 </div>
-
-
 @endsection
