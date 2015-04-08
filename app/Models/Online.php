@@ -52,16 +52,18 @@ class Online extends Model {
 	        ));
 	    }else{
 		    $session = $query->where('id', Session::getId())->first();
-			if($session->user_id==null){
-			    $session->user_id = Auth::user()->id;
-				$session->save();
-			}else if($session->forced_logout){
-				$session->forced_logout = null;
-				$session->user_id = null;
-				$session->save();
-			    Auth::logout();
-			    return redirect('/');
-			}
+		    if($session!=null){
+				if($session->user_id==null){
+				    $session->user_id = Auth::user()->id;
+					$session->save();
+				}else if($session->forced_logout){
+					$session->forced_logout = null;
+					$session->user_id = null;
+					$session->save();
+				    Auth::logout();
+				    return redirect('/');
+				}
+		    }
 			return $session;
 	    }
 
