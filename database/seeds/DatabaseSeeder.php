@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder {
 	public static $uiddict = array();
 	public static $piddict = array();
 	public static $ciddict = array();
-	public static $siddict = array();
+
+	public static $codedict = array();
+	public static $compileinfodict = array();
+	
 	/**
 	 * Run the database seeds.
 	 *
@@ -31,9 +34,10 @@ class DatabaseSeeder extends Seeder {
         $this->call('UserTableSeeder');
         $this->call('ProblemTableSeeder');
 	    $this->call('ContestTableSeeder');
-	    $this->call('SubmitTableSeeder');
 	    $this->call('CodeTableSeeder');
 	    $this->call('CompileinfoTableSeeder');
+	    $this->call('SubmitTableSeeder');
+	    
 	    $this->call('ContestattendTableSeeder');
 	}
 
@@ -79,20 +83,23 @@ class UserTableSeeder extends Seeder {
 			$name = strtolower($item->name);
 			$euser = User::where('email', '=', $email)->first();
 			if($euser != null){
+				$n--;
 				continue;
 			}
 			$euser = User::where('name', '=', $name)->first();
 			if($euser != null){
+				$n--;
 				continue;
 			}
 			if(isset($hash[$email]) || isset($hash[$name])){
+				$n--;
 				continue;
 			}
 			$hash[$email]=1;
 			$hash[$name]=1;
 			
-	
-			User::create([
+			
+			$newitem = User::create([
 		        'created_by'		   => 1,
 		        'updated_by'		   => 1,
 		        'created_at'		   => $item->regtime,
@@ -150,9 +157,8 @@ class UserTableSeeder extends Seeder {
 		    	'twitter_avatar_url'    => '',
 				'twitter_access_token'  => '',
 		    ]);
-		  
 		     
-		    DatabaseSeeder::$uiddict[$item->id]=$i;
+		    DatabaseSeeder::$uiddict[$item->id*1]=$newitem->id;
 		    $i++;
 		    
 		    progressBar($i,$n,'Users');
@@ -222,7 +228,7 @@ class ProblemTableSeeder extends Seeder {
 			}
 			
 		
-			Problem::create([
+			$newitem = Problem::create([
 		        'created_by'		   => 1,
 		        'updated_by'		   => $moduser,
 		        'created_at'		   => $date,
@@ -254,7 +260,7 @@ class ProblemTableSeeder extends Seeder {
 		    ]);
 		
 			
-			DatabaseSeeder::$piddict[$item->id]=$i;
+			DatabaseSeeder::$piddict[$item->id*1]=$newitem->id;
 			$i++;
 			
 			progressBar($i,$n,'Problems');
@@ -321,80 +327,6 @@ class ContestTableSeeder extends Seeder {
 
 
 
-class SubmitTableSeeder extends Seeder {
-
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		$this->command->info('SubmitTableSeeder start');
-
-		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-		DB::table('submits')->truncate();
-		
-		$list = DB::connection('mysql2')->table('submit')->select('*')->orderBy('id', 'asc')->get();
-		
-		$hash = array();
-		$i=1;
-		$n=count($list);
-		
-		foreach ($list as $item)
-		{
-			$uid = $item->uid;
-			$pid = $item->pid;
-			$cid = $item->cid;
-			
-			if(isset(DatabaseSeeder::$uiddict[$uid]) && isset(DatabaseSeeder::$piddict[$pid])){
-				$uid = DatabaseSeeder::$uiddict[$uid];
-				$pid = DatabaseSeeder::$piddict[$pid];
-			}
-			else{
-				continue;
-			}
-			
-			if($cid!=null){
-				if(isset(DatabaseSeeder::$ciddict[$cid])){
-					$cid = DatabaseSeeder::$ciddict[$cid];
-				}
-			}
-			if($cid==null){
-				$cid='';
-			}
-		
-			Submit::create([
-		        'created_at'		   => $item->in_date,
-		        'updated_at'		   => $item->in_date,
-		        'user_id'       	   => $uid,
-		        'problem_id'    	   => $pid,
-		        'time'    	           => $item->time,
-				'memory'     		   => $item->memory,
-				'result'    	   	   => $item->result,
-		        'language'   	  	   => $item->language,
-		        'ip'                   => $item->ip,
-				'is_valid_solution'    => $item->valid,
-		        'code_length'    	   => $item->code_length,
-				'shared'    	       => 0,
-				'contest_id'    	   => $cid,
-		    ]);
-		
-		       
-			DatabaseSeeder::$siddict[$item->id]=$i;
-			$i++;
-			progressBar($i,$n,'Submit');	
-		}
-		
-		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-		$this->command->info('SubmitTableSeeder finished');
-
-	}
-
-}
-
-
-
 class CodeTableSeeder extends Seeder {
 
 	/**
@@ -414,24 +346,18 @@ class CodeTableSeeder extends Seeder {
 		$hash = array();
 		$i=1;
 		$n=count($list);
-		
+	   
 		foreach ($list as $item)
 		{
-			$sid = $item->sid;
+			$sid = $item->sid*1;
+			$text = mysql_escape($item->code);
 			
-			if(isset(DatabaseSeeder::$siddict[$sid])){
-				$sid = DatabaseSeeder::$siddict[$sid];
-			}else{
-				continue;
-			}
-		
-			$code = mysql_escape($item->code);
-			
-			Code::create([
-		        'submit_id'		   => $sid,
-		        'source_code'	   => DB::raw("COMPRESS('$code')"),
-		       ]);
-		       
+			$newcode = Code::create([
+			        'source_code'	   => DB::raw("COMPRESS('$text')"),
+			       ]);
+				   
+			DatabaseSeeder::$codedict[$sid]=$newcode->id;
+	
 			$i++;
 			progressBar($i,$n,'Code');
 		}
@@ -465,19 +391,15 @@ class CompileinfoTableSeeder extends Seeder {
 		
 		foreach ($list as $item)
 		{
-			$sid = $item->sid;
+			$sid = $item->sid*1;
+			$text = mysql_escape($item->error);
 			
-			if(isset(DatabaseSeeder::$siddict[$sid])){
-				$sid = DatabaseSeeder::$siddict[$sid];
-			}else{
-				continue;
-			}
-		
-			Compileinfo::create([
-		        'submit_id'		   => $sid,
-		        'compile_info'	   => $item->error,
+			$newitem = Compileinfo::create([
+		        'compile_info'	   => DB::raw("COMPRESS('$text')"),
 		       ]);
 		       
+		    DatabaseSeeder::$compileinfodict[$sid]=$newitem->id;
+	
 			$i++;
 			progressBar($i,$n,'Compileinfo');
 		}
@@ -488,6 +410,100 @@ class CompileinfoTableSeeder extends Seeder {
 	}
 
 }
+
+
+
+class SubmitTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		$this->command->info('SubmitTableSeeder start');
+
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+		DB::table('submits')->truncate();
+		
+		$list = DB::connection('mysql2')->table('submit')->select('*')->orderBy('id', 'asc')->get();
+		
+		$hash = array();
+		$i=1;
+		$n=count($list);
+		
+		foreach ($list as $item)
+		{
+			$sid = $item->id*1;
+			
+			$uid = $item->uid;
+			$pid = $item->pid;
+			$cid = $item->cid;
+			
+			$uid=0;
+			$pid=0;
+			
+			if(isset(DatabaseSeeder::$uiddict[$uid]) && isset(DatabaseSeeder::$piddict[$pid])){
+				$uid = DatabaseSeeder::$uiddict[$uid];
+				$pid = DatabaseSeeder::$piddict[$pid];
+			}
+			else{
+				$n--;
+				$this->command->info('uiddict not found piddict not found');
+				continue;
+			}
+			
+			if($cid!=null){
+				if(isset(DatabaseSeeder::$ciddict[$cid])){
+					$cid = DatabaseSeeder::$ciddict[$cid];
+				}
+			}
+			
+			$code_id = '';
+			if(isset(DatabaseSeeder::$codedict[$sid])){
+				$code_id = DatabaseSeeder::$codedict[$sid];
+			}
+			else{
+				$this->command->info('code not found sid='.$sid);
+				$n--;
+				continue;	
+			}
+			
+			$compileinfo_id = '';
+			if(isset(DatabaseSeeder::$compileinfodict[$sid])){
+				$compileinfo_id = DatabaseSeeder::$compileinfodict[$sid];
+			}
+			
+			Submit::create([
+		        'created_at'		   => $item->in_date,
+		        'updated_at'		   => $item->in_date,
+		        'user_id'       	   => $uid,
+		        'problem_id'    	   => $pid,
+		        'code_id'    	   	   => $code_id,
+		        'compileinfo_id'       => $compileinfo_id,
+		        'contest_id'    	   => $cid,
+				'time'    	           => $item->time,
+				'memory'     		   => $item->memory,
+				'result'    	   	   => $item->result,
+		        'language'   	  	   => $item->language,
+		        'ip'                   => $item->ip,
+				'is_valid_solution'    => $item->valid,
+		        'code_length'    	   => $item->code_length,
+				'shared'    	       => 0,
+		    ]);
+		
+			$i++;
+			progressBar($i,$n,'Submit');	
+		}
+		
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+		$this->command->info('SubmitTableSeeder finished');
+
+	}
+
+}
+
 
 
 class ContestattendTableSeeder extends Seeder {
@@ -519,12 +535,14 @@ class ContestattendTableSeeder extends Seeder {
 			if(isset(DatabaseSeeder::$ciddict[$cid])){
 				$cid = DatabaseSeeder::$ciddict[$cid];
 			}else{
+				$n--;
 				continue;
 			}
 			
 			if(isset(DatabaseSeeder::$uiddict[$uid])){
 				$uid = DatabaseSeeder::$uiddict[$uid];
 			}else{
+				$n--;
 				continue;
 			}
 		

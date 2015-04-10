@@ -12,7 +12,6 @@ class Code extends BaseModel {
 	 * @var array
 	 */
 	protected $fillable = [
-						'submit_id',
 						'source_code'
 						];
 							
@@ -27,4 +26,5 @@ class Code extends BaseModel {
 		}
 		return $this->source;
 	}
+	
 }

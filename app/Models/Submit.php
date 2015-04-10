@@ -15,6 +15,8 @@ class Submit extends BaseModel {
 						'updated_at',
 						'user_id',
 						'problem_id',
+						'code_id',
+						'contest_id',
 						'time',
 						'memory',
 						'result',
@@ -23,22 +25,32 @@ class Submit extends BaseModel {
 						'is_valid_solution',
 						'code_length',
 						'shared',
-						'contest_id',
 						];
 							
 	protected $hidden = [];
 	
 
-	public function language(){
+	public function language($codelink=true){
 		//gcc -O2 -std=gnu99 -fno-asm -lm -Wall -w -static -DONLINE_JUDGE
 		//g++ -O2 -std=gnu++0x -fno-asm -lm -Wall -w -static -DONLINE_JUDGE
 		$lang = $this->language*1;
-		if($lang===0){
-			return '<abbr title="gcc C99">C</abbr>';
-		}else if($lang===1){
-			return '<abbr title="g++ C++11">C++</abbr>';
-		}else if($lang===2){
-			return '<abbr>Pascal</abbr>';
+		if($codelink){
+			$link = url('/code/'.$this->id);
+			if($lang===0){
+				return '<a href="'.$link.'"><abbr title="gcc C99">C</abbr></a>';
+			}else if($lang===1){
+				return '<a href="'.$link.'"><abbr title="g++ C++11">C++</abbr></a>';
+			}else if($lang===2){
+				return '<a href="'.$link.'"><abbr>Pascal</abbr></a>';
+			}			
+		}else{
+			if($lang===0){
+				return '<abbr title="gcc C99">C</abbr>';
+			}else if($lang===1){
+				return '<abbr title="g++ C++11">C++</abbr>';
+			}else if($lang===2){
+				return '<abbr>Pascal</abbr>';
+			}
 		}
 		return '';
 	}

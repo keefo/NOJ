@@ -9,6 +9,7 @@ use Paginator;
 use Session;
 use Input;
 use DB;
+use Auth;
 
 class SubmitController extends Controller {
 
@@ -57,6 +58,22 @@ class SubmitController extends Controller {
 		}
 		return view('problems.show', compact('problem'));
 		*/
+	}
+	public function code($submit_id)
+	{
+		if(Auth::user()==null){
+			return redirect()->guest('auth/login');
+		}
+		$user_id = Auth::user()->id;
+		//$submit = Submit::where('id', '=', $submit_id)->firstOrFail();
+		$submit = Submit::with('code')->where('id', '=', $submit_id)->firstOrFail();
+		if($submit->user_id!==$user_id){
+			dd('not the author');
+		}
+		dd($submit);
+		
+		return view('problems.show', compact('problem'));
+		
 	}
 	
 	

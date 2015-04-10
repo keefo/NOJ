@@ -14,11 +14,8 @@ class CreateCompileinfosTable extends Migration {
 	{
 		Schema::create('compileinfos', function(Blueprint $table)
 		{
-			$table->bigInteger('submit_id')->unsigned();
-			$table->text('compile_info');
-			$table->foreign('submit_id')->references('id')->on('submits');
-			$table->index('submit_id');
-			$table->primary('submit_id');
+			$table->bigIncrements('id');
+			$table->binary('compile_info');
 		});
 	}
 

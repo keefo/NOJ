@@ -14,11 +14,8 @@ class CreateCodesTable extends Migration {
 	{
 		Schema::create('codes', function(Blueprint $table)
 		{
-			$table->bigInteger('submit_id')->unsigned();
+			$table->bigIncrements('id');
 			$table->binary('source_code');
-			$table->foreign('submit_id')->references('id')->on('submits');
-			$table->index('submit_id');
-			$table->primary('submit_id');
 		});
 	}
 
