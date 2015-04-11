@@ -1,19 +1,15 @@
-<?php
-
-
+<?php 
+	
 use App\Models\User;
 use App\Models\Problem;
 use App\Models\Contest;
 use App\Models\Code;
-use App\Models\Submit;
 use App\Models\Compileinfo;
+use App\Models\Submit;
 use App\Models\Contestattend;
 
-
-use Illuminate\Database\Seeder;
+use Illuminate\Database\Seeder as Seeder;
 use Illuminate\Database\Eloquent\Model;
-
-
 
 class DatabaseSeeder extends Seeder {
 
@@ -26,19 +22,22 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-        $this->call('UserTableSeeder');
-        $this->call('ProblemTableSeeder');
-	    $this->call('ContestTableSeeder');
-	    $this->call('CodeTableSeeder');
-	    $this->call('CompileinfoTableSeeder');
-	    $this->call('SubmitTableSeeder');
-	    
-	    $this->call('ContestattendTableSeeder');
+        //Eloquent::unguard();
+        $this->call('UsersTableSeeder');
+        $this->call('ProblemsTableSeeder');
+	    $this->call('ContestsTableSeeder');
+	    $this->call('CodesTableSeeder');
+	    $this->call('CompileinfosTableSeeder');
+	    $this->call('SubmitsTableSeeder');
+	    $this->call('ContestattendsTableSeeder');
 	}
 
 }
 
-class UserTableSeeder extends Seeder {
+
+
+
+class UsersTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -173,8 +172,7 @@ class UserTableSeeder extends Seeder {
 
 
 
-
-class ProblemTableSeeder extends Seeder {
+class ProblemsTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -183,7 +181,7 @@ class ProblemTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		$this->command->info('ProblemTableSeeder start');
+		$this->command->info('ProblemsTableSeeder start');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('problems')->truncate();
@@ -265,7 +263,7 @@ class ProblemTableSeeder extends Seeder {
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-		$this->command->info('ProblemTableSeeder finished');
+		$this->command->info('ProblemsTableSeeder finished');
 
 	}
 
@@ -273,7 +271,7 @@ class ProblemTableSeeder extends Seeder {
 
 
 
-class ContestTableSeeder extends Seeder {
+class ContestsTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -325,7 +323,8 @@ class ContestTableSeeder extends Seeder {
 
 
 
-class CodeTableSeeder extends Seeder {
+
+class CodesTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -334,7 +333,7 @@ class CodeTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		$this->command->info('CodeTableSeeder start');
+		$this->command->info('CodesTableSeeder start');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('codes')->truncate();
@@ -359,13 +358,16 @@ class CodeTableSeeder extends Seeder {
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-		$this->command->info('CodeTableSeeder finished');
+		$this->command->info('CodesTableSeeder finished');
 
 	}
 
 }
 
-class CompileinfoTableSeeder extends Seeder {
+
+
+
+class CompileinfosTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -374,7 +376,7 @@ class CompileinfoTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		$this->command->info('CompileinfoTableSeeder start');
+		$this->command->info('CompileinfosTableSeeder start');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('compileinfos')->truncate();
@@ -398,7 +400,7 @@ class CompileinfoTableSeeder extends Seeder {
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-		$this->command->info('CompileinfoTableSeeder finished');
+		$this->command->info('CompileinfosTableSeeder finished');
 
 	}
 
@@ -406,7 +408,7 @@ class CompileinfoTableSeeder extends Seeder {
 
 
 
-class SubmitTableSeeder extends Seeder {
+class SubmitsTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -415,7 +417,7 @@ class SubmitTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		$this->command->info('SubmitTableSeeder start');
+		$this->command->info('SubmitsTableSeeder start');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('submits')->truncate();
@@ -474,7 +476,7 @@ class SubmitTableSeeder extends Seeder {
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-		$this->command->info('SubmitTableSeeder finished');
+		$this->command->info('SubmitsTableSeeder finished');
 
 	}
 
@@ -482,7 +484,7 @@ class SubmitTableSeeder extends Seeder {
 
 
 
-class ContestattendTableSeeder extends Seeder {
+class ContestattendsTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -491,7 +493,7 @@ class ContestattendTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		$this->command->info('ContestattendTableSeeder start');
+		$this->command->info('ContestattendsTableSeeder start');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('contestattends')->truncate();
@@ -589,7 +591,7 @@ class ContestattendTableSeeder extends Seeder {
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-		$this->command->info('ContestattendTableSeeder finished');
+		$this->command->info('ContestattendsTableSeeder finished');
 
 	}
 

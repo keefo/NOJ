@@ -38,7 +38,7 @@ class CreateSubmitsTable extends Migration {
 			$table->tinyInteger('language');
 			$table->string('ip', 20);
 			
-			$table->boolean('is_valid_solution');
+			$table->boolean('is_valid_solution')->default(false);
 			$table->integer('code_length')->unsigned();
 			$table->boolean('shared');
 			

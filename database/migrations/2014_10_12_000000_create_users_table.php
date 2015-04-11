@@ -20,12 +20,12 @@ class CreateUsersTable extends Migration {
 			$table->string('password', 60);
 			$table->string('passwordhash', 60);
 			
-			$table->boolean('disabled');
+			$table->boolean('disabled')->default(false);
 			$table->string('email', 255)->unique();
-			$table->boolean('emailprivate');
+			$table->boolean('emailprivate')->default(true);
 			$table->string('name', 45)->unique();
 			$table->string('screen_name', 45);
-			$table->boolean('verified');
+			$table->boolean('verified')->default(false);;
 			$table->bigInteger('submit')->unsigned();
 			$table->bigInteger('solved')->unsigned();
 			$table->tinyInteger('gender');
@@ -43,7 +43,7 @@ class CreateUsersTable extends Migration {
 			$table->string('register_ip', 20);
 			$table->string('school', 80);
 			$table->date('birthday');
-			$table->boolean('birthdayprivate');
+			$table->boolean('birthdayprivate')->default(true);
 			$table->string('phone', 20);
 			$table->integer('country')->unsigned();
 			$table->string('state', 20);
@@ -53,12 +53,12 @@ class CreateUsersTable extends Migration {
 			$table->string('location', 64);
 			$table->string('homepage', 128);
 			$table->string('qq', 45);
-			$table->boolean('qqprivate');
+			$table->boolean('qqprivate')->default(false);
 			$table->string('weibo', 45);
 			$table->string('twitter', 45);
 			$table->string('msn', 45);
 			$table->string('gmail', 255);
-			$table->boolean('gmailprivate');
+			$table->boolean('gmailprivate')->default(true);
 			$table->string('github', 45);
 			$table->string('bio', 255);
 			$table->string('sign', 512);

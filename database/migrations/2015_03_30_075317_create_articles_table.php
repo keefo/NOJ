@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration {
 			$table->bigInteger('create_by')->unsigned();
 			$table->integer('category');
 			
-			$table->boolean('published');
+			$table->boolean('published')->default(false);
 			$table->string('title', 128);
 			$table->string('slug', 128)->unique();
 			$table->mediumText('content');

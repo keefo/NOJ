@@ -19,14 +19,14 @@ class CreateProblemsTable extends Migration {
 			$table->bigInteger('updated_by')->unsigned();
 			$table->bigInteger('created_by')->unsigned();
 			
-			$table->boolean('published');
+			$table->boolean('published')->default(false);
 			$table->string('title', 128);
 			$table->string('slug', 128)->unique();
 			$table->integer('time_limit');
 			$table->integer('memory_limit');
 			$table->integer('case_time_limit');
 			$table->integer('difficulty_level')->unsigned();
-			$table->boolean('is_special_judge');
+			$table->boolean('is_special_judge')->default(false);
 			$table->string('special_judger', 64);
 			
 			$table->text('description');

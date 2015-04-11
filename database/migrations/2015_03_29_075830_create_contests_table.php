@@ -18,12 +18,12 @@ class CreateContestsTable extends Migration {
 			$table->timestamps();
 			$table->bigInteger('create_by')->unsigned();
 			$table->bigInteger('updated_by')->unsigned();
-			$table->boolean('published');
+			$table->boolean('published')->default(false);
 			$table->string('title', 128);
 			$table->text('description');
 			$table->dateTime('start_time');
 			$table->dateTime('end_time');
-			$table->boolean('private');
+			$table->boolean('private')->default(false);
 			$table->string('password', 32);
 			$table->text('solution_report');
 
