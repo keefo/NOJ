@@ -17,11 +17,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder {
 
-	public static $uiddict = array();
-	public static $piddict = array();
-	public static $ciddict = array();
-
-	public static $codedict = array();
 	public static $compileinfodict = array();
 	
 	/**
@@ -69,7 +64,9 @@ class UserTableSeeder extends Seeder {
 
 		foreach ($list as $item)
 		{
-	
+        	$i++;
+		    progressBar($i,$n,'Users');
+
 			$country = 0;
 			if(isset($code[$item->country])){
 				$country=$code[$item->country];
@@ -83,16 +80,13 @@ class UserTableSeeder extends Seeder {
 			$name = strtolower($item->name);
 			$euser = User::where('email', '=', $email)->first();
 			if($euser != null){
-				$n--;
 				continue;
 			}
 			$euser = User::where('name', '=', $name)->first();
 			if($euser != null){
-				$n--;
 				continue;
 			}
 			if(isset($hash[$email]) || isset($hash[$name])){
-				$n--;
 				continue;
 			}
 			$hash[$email]=1;
@@ -154,14 +148,11 @@ class UserTableSeeder extends Seeder {
 				'github_access_token'  => $item->github_access_token,
 				'google_avatar_url'    => $item->google_avatar_url,
 				'google_access_token'  => $item->google_access_token,
-		    	'twitter_avatar_url'    => '',
-				'twitter_access_token'  => '',
+		    	'twitter_avatar_url'   => '',
+				'twitter_access_token' => '',
+				'oldid'                => $item->id,
 		    ]);
-		     
-		    DatabaseSeeder::$uiddict[$item->id*1]=$newitem->id;
-		    $i++;
-		    
-		    progressBar($i,$n,'Users');
+
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -197,6 +188,9 @@ class ProblemTableSeeder extends Seeder {
 		
 		foreach ($list as $item)
 		{
+    		$i++;
+			progressBar($i,$n,'Problems');
+
 			$is_special_judge = 0;
 			$title = $item->title;
 			if (strpos($title,'(Special Judge)') !== false) {
@@ -226,7 +220,6 @@ class ProblemTableSeeder extends Seeder {
 			if(strlen($item->modtime)>0){
 				$date = $item->modtime;
 			}
-			
 		
 			$newitem = Problem::create([
 		        'created_by'		   => 1,
@@ -256,14 +249,10 @@ class ProblemTableSeeder extends Seeder {
 				'accept_count'    	   => $item->accepted,
 				'submit_count'    	   => $item->submit,
 				'submit_user_count'    => $item->submit_user,
-				'solved_user_count'    => $item->solved_user
+				'solved_user_count'    => $item->solved_user,
+		    	'oldid'                => $item->id,
 		    ]);
 		
-			
-			DatabaseSeeder::$piddict[$item->id*1]=$newitem->id;
-			$i++;
-			
-			progressBar($i,$n,'Problems');
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -297,8 +286,11 @@ class ContestTableSeeder extends Seeder {
 		
 		foreach ($list as $item)
 		{
-		
-			Contest::create([
+		    $i++;
+			progressBar($i,$n,'Contest');
+
+
+			$newitem = Contest::create([
 		        'created_at'		   => $date,
 		        'updated_at'		   => $date,
 		        'created_by'		   => 1,
@@ -311,11 +303,8 @@ class ContestTableSeeder extends Seeder {
 		        'private'   	  	   => $item->private,
 		        'password'             => $item->password,
 				'solution_report'      => $item->report,
-		       ]);
-		
-		    DatabaseSeeder::$ciddict[$item->id]=$i;
-			$i++;
-			progressBar($i,$n,'Contest:');	
+		        'oldid'                => $item->id,
+		       ]);	
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -349,17 +338,15 @@ class CodeTableSeeder extends Seeder {
 	   
 		foreach ($list as $item)
 		{
-			$sid = $item->sid*1;
+            $i++;
+			progressBar($i,$n,'Code');
+            
 			$text = mysql_escape($item->code);
 			
 			$newcode = Code::create([
-			        'source_code'	   => DB::raw("COMPRESS('$text')"),
+			        'source_code'	 => DB::raw("COMPRESS('$text')"),
+			        'oldid'	         => $item->sid,
 			       ]);
-				   
-			DatabaseSeeder::$codedict[$sid]=$newcode->id;
-	
-			$i++;
-			progressBar($i,$n,'Code');
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -391,17 +378,15 @@ class CompileinfoTableSeeder extends Seeder {
 		
 		foreach ($list as $item)
 		{
-			$sid = $item->sid*1;
+    		$i++;
+			progressBar($i,$n,'Compileinfo');
+			
 			$text = mysql_escape($item->error);
 			
 			$newitem = Compileinfo::create([
 		        'compile_info'	   => DB::raw("COMPRESS('$text')"),
-		       ]);
-		       
-		    DatabaseSeeder::$compileinfodict[$sid]=$newitem->id;
-	
-			$i++;
-			progressBar($i,$n,'Compileinfo');
+                'oldid'	           => $item->sid,
+			 ]);
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -435,54 +420,41 @@ class SubmitTableSeeder extends Seeder {
 		
 		foreach ($list as $item)
 		{
-			$sid = $item->id*1;
+    		$i++;
+			progressBar($i,$n,'Submit');
 			
-			$uid = $item->uid;
-			$pid = $item->pid;
-			$cid = $item->cid;
+            $user=User::where('oldid','=',$item->uid)->first();
+            if($user==null){
+                $this->command->info('user not found old uid='.$item->uid);
+                continue; 
+            }
+
+            $problem=Problem::where('oldid','=',$item->pid)->first();
+            if($problem==null){
+                $this->command->info('problem not found old pid='.$item->uid);
+                continue; 
+            }
+            
+
+			$code=Code::where('oldid','=',$item->id)->first();
+            if($code==null){
+                $this->command->info('code not found for old submit id='.$item->id);
+                continue; 
+            }
+            
+            $contest=Contest::where('oldid','=',$item->cid)->first();
+			$compileinfo=Compileinfo::where('oldid','=',$item->id)->first();
 			
-			$uid=0;
-			$pid=0;
-			
-			if(isset(DatabaseSeeder::$uiddict[$uid]) && isset(DatabaseSeeder::$piddict[$pid])){
-				$uid = DatabaseSeeder::$uiddict[$uid];
-				$pid = DatabaseSeeder::$piddict[$pid];
-			}
-			else{
-				$n--;
-				$this->command->info('uiddict not found piddict not found');
-				continue;
-			}
-			
-			if($cid!=null){
-				if(isset(DatabaseSeeder::$ciddict[$cid])){
-					$cid = DatabaseSeeder::$ciddict[$cid];
-				}
-			}
-			
-			$code_id = '';
-			if(isset(DatabaseSeeder::$codedict[$sid])){
-				$code_id = DatabaseSeeder::$codedict[$sid];
-			}
-			else{
-				$this->command->info('code not found sid='.$sid);
-				$n--;
-				continue;	
-			}
-			
-			$compileinfo_id = '';
-			if(isset(DatabaseSeeder::$compileinfodict[$sid])){
-				$compileinfo_id = DatabaseSeeder::$compileinfodict[$sid];
-			}
+			echo "add a submit\n";
 			
 			Submit::create([
 		        'created_at'		   => $item->in_date,
 		        'updated_at'		   => $item->in_date,
-		        'user_id'       	   => $uid,
-		        'problem_id'    	   => $pid,
-		        'code_id'    	   	   => $code_id,
-		        'compileinfo_id'       => $compileinfo_id,
-		        'contest_id'    	   => $cid,
+		        'user_id'       	   => $user->id,
+		        'problem_id'    	   => $problem->id,
+		        'code_id'    	   	   => $code->id,
+		        'compileinfo_id'       => $compileinfo==null?'':$compileinfo->id,
+		        'contest_id'    	   => $contest==null?'':$contest->id,
 				'time'    	           => $item->time,
 				'memory'     		   => $item->memory,
 				'result'    	   	   => $item->result,
@@ -493,8 +465,6 @@ class SubmitTableSeeder extends Seeder {
 				'shared'    	       => 0,
 		    ]);
 		
-			$i++;
-			progressBar($i,$n,'Submit');	
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -529,28 +499,27 @@ class ContestattendTableSeeder extends Seeder {
 		
 		foreach ($list as $item)
 		{
-			$cid = $item->cid;
-			$uid = $item->uid;
+    		$i++;
+			progressBar($i,$n,'Contestattend');
 			
-			if(isset(DatabaseSeeder::$ciddict[$cid])){
-				$cid = DatabaseSeeder::$ciddict[$cid];
-			}else{
-				$n--;
+			$contest=Contest::where('oldid','=',$item->cid)->first();
+            if($contest==null){
+                $this->command->info('Contest not found cid='.$item->cid);
 				continue;
-			}
-			
-			if(isset(DatabaseSeeder::$uiddict[$uid])){
-				$uid = DatabaseSeeder::$uiddict[$uid];
-			}else{
-				$n--;
-				continue;
-			}
+            }
+            
+            $user=User::where('oldid','=',$item->uid)->first();
+            if($user==null){
+                $this->command->info('not found old uid='.$item->uid);
+                continue; 
+            }
+
 		
 			Contestattend::create([
 				'created_at'	 => $date,
 		        'updated_at'	 => $date,
-		        'user_id'        => $uid,
-				'contest_id'     => $cid,
+		        'user_id'        => $user->id,
+				'contest_id'     => $contest->id,
 				'username'       => $item->username,
 				'screen_name'    => $item->username,
 				'nick'           => $item->nick,
@@ -611,8 +580,6 @@ class ContestattendTableSeeder extends Seeder {
 				'z_failed_count' => $item->Z_WrongSubmits,
 		       ]);
 		       
-			$i++;
-			progressBar($i,$n,'Contestattend');
 		}
 		
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');

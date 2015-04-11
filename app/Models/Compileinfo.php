@@ -12,7 +12,8 @@ class Compileinfo extends BaseModel {
 	 * @var array
 	 */
 	protected $fillable = [
-						'compile_info'
+						'compile_info',
+						'oldid',
 						];
 							
 	protected $hidden = [];

@@ -18,25 +18,25 @@ class CreateContestsTable extends Migration {
 			$table->timestamps();
 			$table->bigInteger('create_by')->unsigned();
 			$table->bigInteger('updated_by')->unsigned();
-			
 			$table->boolean('published');
 			$table->string('title', 128);
 			$table->text('description');
-			
 			$table->dateTime('start_time');
 			$table->dateTime('end_time');
-			
 			$table->boolean('private');
 			$table->string('password', 32);
-
 			$table->text('solution_report');
 
 			$table->foreign('create_by')->references('id')->on('users');
 			$table->foreign('updated_by')->references('id')->on('users');
-						
 			$table->index('title');
 			$table->index('private');
 			$table->index('published');
+
+
+            $table->bigInteger('oldid')->unsigned();
+			$table->index('oldid');
+
 			
 		});
 	}

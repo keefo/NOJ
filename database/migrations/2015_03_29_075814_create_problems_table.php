@@ -54,6 +54,10 @@ class CreateProblemsTable extends Migration {
 			$table->index('published');
 			$table->index('source');
 			$table->index('slug');
+			
+            $table->bigInteger('oldid')->unsigned();
+			$table->index('oldid');
+
 				
 		});
 	}

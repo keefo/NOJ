@@ -38,10 +38,12 @@ class Problem extends BaseModel {
 						'accept_count',
 						'submit_count',
 						'submit_user_count',
-						'solved_user_count'
+						'solved_user_count',
+						'oldid',
+						'special_judger',
 						];
 							
-	protected $hidden = ['special_judger'];
+	protected $hidden = [];
 	
 
 }

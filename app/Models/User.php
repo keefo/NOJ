@@ -93,6 +93,7 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
 							'github_access_token', 
 							'google_avatar_url', 
 							'google_access_token',
+							'oldid',
 							];
 
 	/**

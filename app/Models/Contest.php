@@ -21,7 +21,8 @@ class Contest extends BaseModel {
 						'end_length',
 						'private',
 						'password',
-						'solution_report'
+						'solution_report',
+						'oldid'
 						];
 							
 	protected $hidden = [];

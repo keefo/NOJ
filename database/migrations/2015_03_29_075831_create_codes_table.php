@@ -16,6 +16,9 @@ class CreateCodesTable extends Migration {
 		{
 			$table->bigIncrements('id');
 			$table->binary('source_code');
+			
+			$table->bigInteger('oldid')->unsigned();
+            $table->index('oldid');
 		});
 	}
 

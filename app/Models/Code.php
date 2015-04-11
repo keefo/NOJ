@@ -12,7 +12,8 @@ class Code extends BaseModel {
 	 * @var array
 	 */
 	protected $fillable = [
-						'source_code'
+						'source_code',
+						'oldid',
 						];
 							
 	protected $hidden = [];

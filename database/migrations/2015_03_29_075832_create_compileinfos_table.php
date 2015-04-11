@@ -16,6 +16,9 @@ class CreateCompileinfosTable extends Migration {
 		{
 			$table->bigIncrements('id');
 			$table->binary('compile_info');
+			
+            $table->bigInteger('oldid')->unsigned();
+            $table->index('oldid');
 		});
 	}
 
