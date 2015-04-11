@@ -59,21 +59,27 @@ class SubmitController extends Controller {
 		return view('problems.show', compact('problem'));
 		*/
 	}
+	
+
+	
 	public function code($submit_id)
 	{
-		if(Auth::user()==null){
+		$user = Auth::user();
+		if($user==null){
 			return redirect()->guest('auth/login');
 		}
-		$user_id = Auth::user()->id;
-		//$submit = Submit::where('id', '=', $submit_id)->firstOrFail();
-		$submit = Submit::with('code')->where('id', '=', $submit_id)->firstOrFail();
-		if($submit->user_id!==$user_id){
-			dd('not the author');
+		
+		$submit = Submit::select('submits.*', 'users.name', 'users.screen_name', 'problems.title', 'problems.slug', DB::raw('UNCOMPRESS(codes.source_code) as code'))->
+				leftjoin('codes', 'codes.id', '=', 'submits.code_id')->
+				leftjoin('problems', 'problems.id', '=', 'submits.problem_id')->
+				leftjoin('users', 'users.id', '=', 'submits.user_id')->
+				where('submits.id', $submit_id)->firstOrFail();
+		
+		if($submit->user_id!==$user->id && !$user->isAdmin()){
+			return redirect()->guest('auth/login');
 		}
-		dd($submit);
 		
-		return view('problems.show', compact('problem'));
-		
+		return view('submits.show', compact('submit'));
 	}
 	
 	

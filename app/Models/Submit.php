@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use Auth;
 
 class Submit extends BaseModel {
 
@@ -34,22 +35,24 @@ class Submit extends BaseModel {
 		//gcc -O2 -std=gnu99 -fno-asm -lm -Wall -w -static -DONLINE_JUDGE
 		//g++ -O2 -std=gnu++0x -fno-asm -lm -Wall -w -static -DONLINE_JUDGE
 		$lang = $this->language*1;
-		if($codelink){
+		$user = Auth::user();
+
+		if($codelink && $user!=null && ($user->id==$this->user_id || $user->isAdmin())){
 			$link = url('/code/'.$this->id);
 			if($lang===0){
-				return '<a href="'.$link.'"><abbr title="gcc C99">C</abbr></a>';
+				return '<a href="'.$link.'" class="codelink" title="gcc C99">C</a>';
 			}else if($lang===1){
-				return '<a href="'.$link.'"><abbr title="g++ C++11">C++</abbr></a>';
+				return '<a href="'.$link.'" class="codelink" title="g++ C++11">C++</a>';
 			}else if($lang===2){
-				return '<a href="'.$link.'"><abbr>Pascal</abbr></a>';
+				return '<a href="'.$link.'" class="codelink">Pascal</a>';
 			}			
 		}else{
 			if($lang===0){
-				return '<abbr title="gcc C99">C</abbr>';
+				return '<span title="gcc C99">C</span>';
 			}else if($lang===1){
-				return '<abbr title="g++ C++11">C++</abbr>';
+				return '<span title="g++ C++11">C++</span>';
 			}else if($lang===2){
-				return '<abbr>Pascal</abbr>';
+				return '<span>Pascal</span>';
 			}
 		}
 		return '';
@@ -63,6 +66,16 @@ class Submit extends BaseModel {
 		return $this->memory.'K';
 	}
 	
+	public function code(){
+		$code = $this->hasOne('App\Models\Code', 'id')->first();
+		return $code->code();
+	}
+	
+	public function user(){
+		$user = $this->hasOne('App\Models\User', 'id')->first();
+		return $user;
+	}
+
 	public function resultStatus(){
 		static $ra = [
 	    	0 => '<span class="S_AC" title="Accepted">Accepted</span>',

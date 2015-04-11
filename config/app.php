@@ -148,7 +148,7 @@ return [
 		
 		'Illuminate\Html\HtmlServiceProvider',
 		'Laravel\Socialite\SocialiteServiceProvider',
-		
+		'GrahamCampbell\HTMLMin\HTMLMinServiceProvider',
 		
 	],
 
@@ -205,6 +205,7 @@ return [
 		'Admin' 	=> 'App\Models\Admin\Admin',
 		'HtmlBuilder' => 'App\Html\HtmlBuilder',
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
+		'HTMLMin' => 'GrahamCampbell\HTMLMin\Facades\HTMLMin',
 		
 	],
 

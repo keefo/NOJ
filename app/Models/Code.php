@@ -23,7 +23,7 @@ class Code extends BaseModel {
 	{
 		if($this->source==null){
 			$this->source = $this->attributes['source_code'];
-			$this->source = gzuncompress(substr($this->source, 4));
+			$this->source = trim(gzuncompress(substr($this->source, 4)));
 		}
 		return $this->source;
 	}

@@ -53,3 +53,18 @@
 
 
 @endsection
+
+
+@section('scripts')
+<script>
+$(function(){
+	/*$('.codelink').click(function(){
+		var h = 840;
+		var w = 800;
+		var url = $(this).attr('href');
+		window.open(url, '', 'scrollbars=1,height=' + h + ', width=' + w + ', top=150,left=50, toolbar=no, menubar=no,');
+		return false;
+	});*/
+});
+</script>
+@stop

@@ -48,14 +48,18 @@ class UserTableSeeder extends Seeder {
 	public function run()
 	{
 		//Model::unguard();
+		
+			
 		$this->command->info('UserTableSeeder start');
+		
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('users')->truncate();
 		
 		$code=countriesCode();
 		
 		$OLD_NOJ_PWD_ENCODE_STRING = env('OLD_NOJ_PWD_ENCODE_STRING');
-
+		
+		
 		$list = DB::connection('mysql2')->table('user')->leftJoin('userinfo', 'user.id', '=', 'userinfo.uid')->select('*', DB::raw('decode(pwd,\''.$OLD_NOJ_PWD_ENCODE_STRING.'\') as pwd'))->orderBy('id', 'asc')->get();
 		
 		$hash = array();
@@ -92,6 +96,11 @@ class UserTableSeeder extends Seeder {
 			$hash[$email]=1;
 			$hash[$name]=1;
 			
+			$role = $item->role*1;
+			
+			if($item->id==1){
+				$role |= 8;
+			}
 			
 			$newitem = User::create([
 		        'created_by'		   => 1,
@@ -111,7 +120,7 @@ class UserTableSeeder extends Seeder {
 				'gender'    	       => $item->gender,
 		        'volume'    	       => $item->volume,
 				'lang'    	           => $item->lang,
-				'role'    	           => $item->role,
+				'role'    	           => $role,
 				'avatarfile'           => $item->avatarfile,
 				'recoveryhash'    	   => $item->gphash,
 		        'login_at'    	       => $item->logintime,
@@ -382,7 +391,6 @@ class CompileinfoTableSeeder extends Seeder {
 			progressBar($i,$n,'Compileinfo');
 			
 			$text = mysql_escape($item->error);
-			
 			$newitem = Compileinfo::create([
 		        'compile_info'	   => DB::raw("COMPRESS('$text')"),
                 'oldid'	           => $item->sid,
@@ -425,28 +433,26 @@ class SubmitTableSeeder extends Seeder {
 			
             $user=User::where('oldid','=',$item->uid)->first();
             if($user==null){
-                $this->command->info('user not found old uid='.$item->uid);
+                //$this->command->info('user not found old uid='.$item->uid);
                 continue; 
             }
 
             $problem=Problem::where('oldid','=',$item->pid)->first();
             if($problem==null){
-                $this->command->info('problem not found old pid='.$item->uid);
+                //$this->command->info('problem not found old pid='.$item->uid);
                 continue; 
             }
             
 
 			$code=Code::where('oldid','=',$item->id)->first();
             if($code==null){
-                $this->command->info('code not found for old submit id='.$item->id);
+                //$this->command->info('code not found for old submit id='.$item->id);
                 continue; 
             }
             
             $contest=Contest::where('oldid','=',$item->cid)->first();
 			$compileinfo=Compileinfo::where('oldid','=',$item->id)->first();
-			
-			echo "add a submit\n";
-			
+		
 			Submit::create([
 		        'created_at'		   => $item->in_date,
 		        'updated_at'		   => $item->in_date,
@@ -504,13 +510,13 @@ class ContestattendTableSeeder extends Seeder {
 			
 			$contest=Contest::where('oldid','=',$item->cid)->first();
             if($contest==null){
-                $this->command->info('Contest not found cid='.$item->cid);
+                //$this->command->info('Contest not found cid='.$item->cid);
 				continue;
             }
             
             $user=User::where('oldid','=',$item->uid)->first();
             if($user==null){
-                $this->command->info('not found old uid='.$item->uid);
+                //$this->command->info('not found old uid='.$item->uid);
                 continue; 
             }
 
