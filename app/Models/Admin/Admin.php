@@ -23,7 +23,7 @@ class Admin extends BaseModel
 		static::$instance = $this;
 
 		$user = Auth::user();
-		if(!$user->isAdmin()){
+		if($user==null || !$user->isAdmin()){
 			header('Location: '.url('home'));
 			exit;
 		}
