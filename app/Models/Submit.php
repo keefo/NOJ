@@ -174,7 +174,7 @@ class Submit extends BaseModel {
 		$submits = Submit::orderBy('submits.id', 'desc')->
 		leftJoin('users','users.id','=','submits.user_id')->
 		leftJoin('problems','problems.id','=','submits.problem_id')->
-		select(array('submits.*','users.name as username','problems.title as problemtitle','problems.slug as problemslug'))->
+		select(array('submits.*','users.username','users.screen_name','problems.title as problemtitle','problems.slug as problemslug'))->
 		paginate($pagelen);
 		return $submits;
 	}
