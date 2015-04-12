@@ -26,7 +26,7 @@
 					{{ $submit->relativeCreatedDate() }}
 				</td>
 				<td>
-					<a href="#">{{ $submit->username }}</a>
+					<a href="{{ url('/users', $submit->username) }}">{{ $submit->screen_name }}</a>
 				</td>
 				<td>
 					<a href="{{ url('/problems', $submit->problemslug) }}">{{ $submit->problemtitle }}</a>

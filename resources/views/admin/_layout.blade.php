@@ -4,8 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>NUC Online Judge Admin v3</title>
 
+	<title>@section('title') 
+		NOJ @show</title>
+		
 	<link id="page_favicon" href="{{ url('/favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
 	<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
@@ -37,7 +39,7 @@
 		<ul class="nav navbar-top-links navbar-right">
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="fa fa-user fa-fw"></i> {{ Admin::admin()->name }} <i class="fa fa-caret-down"></i>
+					<i class="fa fa-user fa-fw"></i> {{ Auth::user()->screen_name }} <i class="fa fa-caret-down"></i>
 				</a>
 				<ul class="dropdown-menu dropdown-user">
 					<li><a href="{{ url('home') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
@@ -52,17 +54,25 @@
 						{!! $item->render() !!}
 					@endforeach
 				</ul>
+				<div id="test"></div>
 			</div>
 		</div>
 		
 	</nav>
 	
-	@yield('content')
+	<div id="page-wrapper" style="min-height: 469px;">
+		<div class="row">
+			@yield('content')
+		</div>
+	</div>
 
 </div>
 
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+@yield('scripts', '')
+
 </body>
 </html>

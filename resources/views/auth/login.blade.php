@@ -27,7 +27,7 @@
 								<div class="form-group">
 									<label class="control-label"><strong>Username or Email</strong></label>
 									<div class="">
-										{!! Form::text('inputid', Input::old('inputid'), array('tabindex' => '1', 'class' => 'form-control')) !!}
+										{!! Form::text('username', Input::old('username'), array('tabindex' => '1', 'class' => 'form-control')) !!}
 									</div>
 								</div>
 		
