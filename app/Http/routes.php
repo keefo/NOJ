@@ -33,9 +33,15 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+/*
 Route::get('admin', 'AdminController@index');
 Route::get('admin/articles', 'AdminController@articles');
 Route::get('admin/problems', 'AdminController@problems');
 Route::get('admin/users', 'AdminController@users');
+*/
 
+if (Request::is('admin/*'))
+{
+    require __DIR__.'/admin_routes.php';
+}
 
