@@ -202,7 +202,6 @@ return [
 		'HTML'		=> 'Illuminate\Html\HtmlFacade',
 		'Paginator' => 'Illuminate\Pagination\Paginator',
 		'Online' 	=> 'App\Models\Online',
-		'Admin' 	=> 'App\Models\Admin\Admin',
 		'HtmlBuilder' => 'App\Html\HtmlBuilder',
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 		'HTMLMin' => 'GrahamCampbell\HTMLMin\Facades\HTMLMin',

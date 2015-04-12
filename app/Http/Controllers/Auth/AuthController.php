@@ -35,12 +35,12 @@ class AuthController extends Controller {
 	public function postLogin(Request $request)
 	{
 	    $this->validate($request, [
-	        'inputid' => 'required',
+	        'username' => 'required',
 	        'password' => 'required',
 	    ]);
 		
-		$field = filter_var($request->input('inputid'), FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-		$request->merge([$field => $request->input('inputid')]);
+		$field = filter_var($request->input('username'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+		$request->merge([$field => $request->input('username')]);
 		//dd(Input::all());
 		
 	    if ($this->auth->attempt($request->only($field, 'password'), $request->has('remember')))
@@ -49,7 +49,7 @@ class AuthController extends Controller {
 	    }
 	
 	    return redirect($this->loginPath())
-	                ->withInput($request->only('inputid', 'remember'))
+	                ->withInput($request->only('username', 'remember'))
 	                ->withErrors([
 	                    'inputid' => 'This credential do not match our records.',
 	                ]);

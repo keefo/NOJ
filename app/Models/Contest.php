@@ -16,9 +16,10 @@ class Contest extends BaseModel {
 						'updated_by',
 						'published',
 						'title',
+						'slug',
 						'description',
 						'start_time',
-						'end_length',
+						'end_time',
 						'private',
 						'password',
 						'solution_report',
@@ -28,4 +29,11 @@ class Contest extends BaseModel {
 	protected $hidden = [];
 	
 
+	public static function getContestsWithPageSize($pagelen=20){
+		$items = Contest::orderBy('id', 'desc')->
+		select(array('*'))->
+		paginate($pagelen);
+		return $items;
+	}
+	
 }

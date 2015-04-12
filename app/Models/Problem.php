@@ -45,5 +45,13 @@ class Problem extends BaseModel {
 							
 	protected $hidden = [];
 	
+	
+	
+	public static function getProblemsWithPageSize($pagelen=20){
+		$items = Problem::orderBy('problems.id', 'asc')->
+		select(array('*'))->
+		paginate($pagelen);
+		return $items;
+	}
 
 }

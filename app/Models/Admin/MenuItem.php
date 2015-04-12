@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Arr;
 use App\Html\HtmlBuilder;
+use Auth;
 
 /**
  * Class MenuItem
@@ -42,8 +43,12 @@ class MenuItem
 	 */
 	function __construct($label, $url, $icon, $className='')
 	{
-		$admin = Admin::admin();
-		$this->htmlBuilder = $admin->htmlBuilder;
+		$user = Auth::user();
+		if($user==null || !$user->isAdmin()){
+			dd('not admin');
+		}
+		$admin = $user;
+		$this->htmlBuilder = $admin->htmlBuilder();
 		$this->url = $url;
 		$this->label = $label;
 		$this->icon = $icon;
@@ -146,6 +151,10 @@ class MenuItem
 		{
 			$content = $this->renderSingleItem();
 		}
+		
+		if(startsWith($_SERVER['REQUEST_URI'], $this->url)){
+			return $this->htmlBuilder->tag('li', ['class'=>'active'], $content);
+		}
 		return $this->htmlBuilder->tag('li', [], $content);
 	}
 
@@ -162,6 +171,9 @@ class MenuItem
 			]
 		]);
 		$content .= ' ' . $this->label;
+		if(startsWith($_SERVER['REQUEST_URI'], $this->url)){
+			return $this->htmlBuilder->tag('a', ['href' => $this->url, 'class'=>'active'], $content);
+		}
 		return $this->htmlBuilder->tag('a', ['href' => $this->url], $content);
 	}
 
