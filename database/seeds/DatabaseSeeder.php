@@ -80,20 +80,20 @@ class UsersTableSeeder extends Seeder {
 			}
 		
 			$email = strtolower($item->email);
-			$name = strtolower($item->name);
+			$username = strtolower($item->name);
 			$euser = User::where('email', '=', $email)->first();
 			if($euser != null){
 				continue;
 			}
-			$euser = User::where('name', '=', $name)->first();
+			$euser = User::where('username', '=', $username)->first();
 			if($euser != null){
 				continue;
 			}
-			if(isset($hash[$email]) || isset($hash[$name])){
+			if(isset($hash[$email]) || isset($hash[$username])){
 				continue;
 			}
 			$hash[$email]=1;
-			$hash[$name]=1;
+			$hash[$username]=1;
 			
 			$role = $item->role*1;
 			
@@ -111,7 +111,7 @@ class UsersTableSeeder extends Seeder {
 		        'passwordhash'         => User::encrypthash($item->pwd),
 		        'email'    	           => $item->email,
 				'emailprivate'    	   => $item->emailprivate,
-		        'name'   	           => $item->name,
+		        'username'   	       => $item->name,
 		        'screen_name'   	   => $item->name,
 				'verified'    	       => $item->verified,
 		        'submit'    	       => $item->submit,
@@ -287,6 +287,7 @@ class ContestsTableSeeder extends Seeder {
 		
 		$list = DB::connection('mysql2')->table('contest')->select('*')->orderBy('id', 'asc')->get();
 		
+		$hash = array();
 		$i=1;
 		$n=count($list);
 		$date = new DateTime;
@@ -295,8 +296,18 @@ class ContestsTableSeeder extends Seeder {
 		{
 		    $i++;
 			progressBar($i,$n,'Contest');
-
-
+			
+			$title = $item->title;
+			
+			$slug = str_slug($title);
+			$k=1;
+			while(isset($hash[$slug])){
+				$slug = str_slug($title+' '+$k);
+				$k++;
+			}
+			$hash[$slug]=1;
+			
+			
 			$newitem = Contest::create([
 		        'created_at'		   => $date,
 		        'updated_at'		   => $date,
@@ -304,6 +315,7 @@ class ContestsTableSeeder extends Seeder {
 		        'updated_by'		   => 1,
 		        'published'       	   => $item->defunct=='Y'?0:1,
 		        'title'    	           => $item->title,
+		        'slug'				   => $slug,
 		        'description'    	   => $item->description,
 				'start_time'     	   => $item->start_time,
 				'end_time'    	   	   => $item->end_time,

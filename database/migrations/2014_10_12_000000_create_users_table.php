@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('disabled')->default(false);
 			$table->string('email', 255)->unique();
 			$table->boolean('emailprivate')->default(true);
-			$table->string('name', 45)->unique();
+			$table->string('username', 45)->unique();
 			$table->string('screen_name', 45);
 			$table->boolean('verified')->default(false);;
 			$table->bigInteger('submit')->unsigned();
@@ -73,7 +73,7 @@ class CreateUsersTable extends Migration {
 			
 		
 			$table->index('email');
-			$table->index('name');
+			$table->index('username');
 			$table->index('screen_name');
 			$table->index('gmail');
 			$table->index('qq');

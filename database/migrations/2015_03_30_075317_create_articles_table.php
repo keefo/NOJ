@@ -17,16 +17,18 @@ class CreateArticlesTable extends Migration {
 			$table->bigIncrements('id');
 			$table->timestamps();
 			$table->bigInteger('updated_by')->unsigned();
-			$table->bigInteger('create_by')->unsigned();
+			$table->bigInteger('created_by')->unsigned();
 			$table->integer('category');
 			
 			$table->boolean('published')->default(false);
 			$table->string('title', 128);
 			$table->string('slug', 128)->unique();
+			$table->text('introduction');
+			
 			$table->mediumText('content');
 			
 			$table->foreign('updated_by')->references('id')->on('users');
-			$table->foreign('create_by')->references('id')->on('users');
+			$table->foreign('created_by')->references('id')->on('users');
 			
 			$table->index('title');
 			$table->index('slug');

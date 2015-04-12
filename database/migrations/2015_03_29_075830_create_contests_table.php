@@ -20,6 +20,7 @@ class CreateContestsTable extends Migration {
 			$table->bigInteger('updated_by')->unsigned();
 			$table->boolean('published')->default(false);
 			$table->string('title', 128);
+			$table->string('slug', 128)->unique();
 			$table->text('description');
 			$table->dateTime('start_time');
 			$table->dateTime('end_time');
