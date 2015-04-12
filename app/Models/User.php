@@ -4,6 +4,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Html\HtmlBuilder;
 
 class User extends BaseModel implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -15,7 +16,8 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
 	 * @var string
 	 */
 	protected $table = 'users';
-	
+	private $htmlBuilder;
+
 /*
 	protected $guarded = [
 						'id', 
@@ -40,7 +42,7 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 
+	protected $fillable = ['username', 
 							'email', 
 							'password', 
 							'passwordhash',
@@ -151,6 +153,19 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
 		return ($this->role*1 & 8)>0;
 	}
 
+	public function htmlBuilder(){
+		if($this->htmlBuilder==null){
+			$this->htmlBuilder = new HtmlBuilder();
+		}
+		return $this->htmlBuilder;
+	}
+	
+	public static function getUsersWithPageSize($pagelen=20){
+		$items = User::orderBy('users.id', 'desc')->
+		select(array('users.*'))->
+		paginate($pagelen);
+		return $items;
+	}
 
 }
 
