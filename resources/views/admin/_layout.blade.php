@@ -33,7 +33,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<span class="navbar-brand"><a href="{{ url('/') }}" title="home page"><img class="navbar-logo" src="{{ url('/img/logo.png') }}" /></a> <a href="{{ url('admin') }}" title="admin panel">NOJ Admin</a></span>
+			<span class="navbar-brand"><a href="{{ url('/') }}" title="home page"><img class="navbar-logo" src="{{ url('/img/logo.png') }}" /></a> <a href="{{ url('admin','dashboard') }}" title="admin panel">NOJ Admin</a></span>
 		</div>
 		
 		<ul class="nav navbar-top-links navbar-right">
