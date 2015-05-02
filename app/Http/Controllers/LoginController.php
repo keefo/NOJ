@@ -51,7 +51,7 @@ class LoginController extends Controller {
 		   	
 	        $userData = $provider->user();
 
-            $ojuser = User::where('name', $userData->nickname)->orWhere('email', $userData->email)->first();
+            $ojuser = User::where('username', $userData->nickname)->orWhere('email', $userData->email)->first();
 		
             if($ojuser==null){
 	            
@@ -76,7 +76,7 @@ class LoginController extends Controller {
 					'passwordhash'         => User::encrypthash($pwd),
 		        	'email'    	           => $userData->email,
 					'emailprivate'    	   => false,
-			        'name'   	           => $userData->nickname,
+			        'username'   	       => $userData->nickname,
 			        'screen_name'   	   => $userData->name,
 					'verified'    	       => true,
 			        'submit'    	       => 0,
