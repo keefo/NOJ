@@ -37,7 +37,7 @@ class Submit extends BaseModel {
 		$lang = $this->language*1;
 		$user = Auth::user();
 
-		if($codelink && $user!=null && ($user->id==$this->user_id || $user->isAdmin())){
+		if($codelink && $user!=null && ($user->id==$this->user_id /*|| $user->isAdmin()*/)){
 			$link = url('/code/'.$this->id);
 			if($lang===0){
 				return '<a href="'.$link.'" class="codelink" title="gcc C99">C</a>';

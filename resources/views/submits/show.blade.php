@@ -34,14 +34,12 @@
 
 @section('scripts')
 <script>
-$(function(){
-	var editor = ace.edit("code");
-    editor.setOptions({
-    	maxLines: Infinity
-	});
-	editor.setReadOnly(true);
-	editor.setTheme("ace/theme/theme-github");
-	editor.getSession().setMode("ace/mode/c_cpp");
+var editor = ace.edit("code");
+editor.setOptions({
+	maxLines: Infinity
 });
+editor.setReadOnly(true);
+editor.setTheme("ace/theme/theme-github");
+editor.getSession().setMode("ace/mode/c_cpp");
 </script>
 @stop
