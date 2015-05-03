@@ -28,7 +28,7 @@ This is the 3rd version of NUC Online Judge system. The new system build on [Lar
 
 ## License
 
-    CATweaker & CATweakerSense is published under MIT License
+    NOJ is published under MIT License
 
     Copyright (c) 2015 Xu Lian (@lianxu)
 

@@ -69,7 +69,7 @@ class SubmitController extends Controller {
 			return redirect()->guest('auth/login');
 		}
 		
-		$submit = Submit::select('submits.*', 'users.name', 'users.screen_name', 'problems.title', 'problems.slug', DB::raw('UNCOMPRESS(codes.source_code) as code'))->
+		$submit = Submit::select('submits.*', 'users.username', 'users.screen_name', 'problems.title', 'problems.slug', DB::raw('UNCOMPRESS(codes.source_code) as code'))->
 				leftjoin('codes', 'codes.id', '=', 'submits.code_id')->
 				leftjoin('problems', 'problems.id', '=', 'submits.problem_id')->
 				leftjoin('users', 'users.id', '=', 'submits.user_id')->
