@@ -9,6 +9,7 @@ use Paginator;
 use Session;
 use DB;
 use Auth;
+use Response;
 
 class UsersController extends AdminController {
 
@@ -34,5 +35,60 @@ class UsersController extends AdminController {
         $title = "Create Article";
 		return view('admin.articles.create_edit', compact('title'));
     }
+    
+	public function getToggle($id=null)
+	{
+		if (is_null($id)) 
+		{
+			return Response::json('-1', 404);
+		} 
+		else{
+    		$user = User::find($id);
+			if(is_null($user)){
+    		    return Response::json('-1', 404);
+			} else {
+            	$user->disabled = !$user->disabled;
+            	$user->save();
+            	if($user->disabled){
+    			    return Response::json('disabled');
+            	}
+            	else if($user->verified){
+    			    return Response::json('verified');
+            	}
+            	else{
+    			    return Response::json('unverified');
+            	}
+			}
+		}
+	}
+	
+    
+    /**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function getEdit($id=null)
+	{
+		if (is_null($id)) 
+		{
+			return Response::json('User id is required', 404);
+		} 
+		else{
+    		$user = User::find($id);
+			if(is_null($user)){
+			    return Response::json('User not found', 404);
+			} else {
+                return Response::json($user);
+			}
+		}
+	}
+	
+	
+	public function postEdit()
+	{
+        return Response::json('unimplemented', 500);
+	}
 
 }

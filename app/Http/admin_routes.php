@@ -32,6 +32,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     #Users
     Route::get('users/', 'Admin\UsersController@index');
+    
+    Route::get('users/{id}/toggle', 'Admin\UsersController@getToggle');
+    
     Route::get('users/create', 'Admin\UsersController@getCreate');
     Route::post('users/create', 'Admin\UsersController@postCreate');
     Route::get('users/{id}/edit', 'Admin\UsersController@getEdit');

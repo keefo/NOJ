@@ -40,6 +40,8 @@ Route::get('admin/problems', 'AdminController@problems');
 Route::get('admin/users', 'AdminController@users');
 */
 
+Route::get('admin', 'Admin\DashboardController@index');
+
 if (Request::is('admin/*'))
 {
     require __DIR__.'/admin_routes.php';

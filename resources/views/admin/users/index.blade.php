@@ -24,7 +24,7 @@
 						<th><h5>Email</h5></th>
 						<th><h5>From</h5></th>
 						<th><h5>Solved/Submit</h5></th>
-						<th><h5>login count</h5></th>
+						<th class="sorting" data-field="price" data-sortable="true" data-sorter="logincount"><h5>login count <i class="fa fa-sort-desc"></i></h5></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,9 +44,9 @@
 								  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Send Verification Email</a></li>
 								  @endif
 								  @if($item->disabled)
-								  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Enabled this user</a></li>
+								  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="toggle" onclick="toggleuser({{ $item->id }})">Enable this user</a></li>
 								  @else
-								  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Disable this user</a></li>
+								  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="toggle" onclick="toggleuser({{ $item->id }})">Disable this user</a></li>
 								  @endif
 							  </ul>
 						</td>
@@ -82,3 +82,32 @@
     </div>
 
 @endsection
+
+@section('scripts')
+
+<script>
+function toggleuser(id){
+    $.get('/admin/users/'+id+'/toggle',function(r){
+        if(r=='disabled'){
+            $('#p_'+id).removeClass('success danger warning').addClass('danger');
+            $('#p_'+id).find('.toggle').html('Enabled this user');
+        }
+        else if(r=='verified'){
+            $('#p_'+id).removeClass('success danger warning').addClass('success');
+            $(this).find('.toggle').html('Disable this user');
+        }
+        else if(r=='unverified'){
+            $('#p_'+id).removeClass('success danger warning').addClass('warning');
+            $(this).find('.toggle').html('Disable this user');
+        }
+    });
+}
+
+$(function(){
+   console.log('toggleuser'); 
+});
+</script>
+
+
+@endsection
+
